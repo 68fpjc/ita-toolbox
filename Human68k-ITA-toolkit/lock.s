@@ -117,13 +117,13 @@ compare_done:
 	dc.b	'## lock 1.0 ##  Copyright(C)1991 by Itagaki Fumihiko',0
 
 msg_myname:		dc.b	6,'lock: '
-msg_not_a_tty:		dc.b	26,'“ü—Í‚ª’[––‚Å‚Í‚ ‚è‚Ü‚¹‚ñ',CR,LF
-msg_keys_are_different:	dc.b	16,'ƒL[‚ªˆá‚¢‚Ü‚·',CR,LF
-msg_enter_key:		dc.b	'ƒL[‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢:',0
-msg_again:		dc.b	'‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢:',0
-msg_locked:		dc.b	'ƒƒbƒN‚µ‚Ü‚µ‚½'
+msg_not_a_tty:		dc.b	26,'å…¥åŠ›ãŒç«¯æœ«ã§ã¯ã‚ã‚Šã¾ã›ã‚“',CR,LF
+msg_keys_are_different:	dc.b	16,'ã‚­ãƒ¼ãŒé•ã„ã¾ã™',CR,LF
+msg_enter_key:		dc.b	'ã‚­ãƒ¼ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„:',0
+msg_again:		dc.b	'ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„:',0
+msg_locked:		dc.b	'ãƒ­ãƒƒã‚¯ã—ã¾ã—ãŸ'
 str_newline:		dc.b	CR,LF,0
-msg_key:		dc.b	'ƒL[:',0
+msg_key:		dc.b	'ã‚­ãƒ¼:',0
 ****************************************************************
 .bss
 .even

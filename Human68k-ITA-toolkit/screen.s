@@ -33,17 +33,17 @@ cmd_screen:
 		move.w	d0,d5
 		and.w	d3,d0
 		and.w	d4,d0
-		not.w	d0				* cmp.l #-1,d0 �̑���
-		beq	screen_end			* ���ׂĂ� -1 �i���w��j
+		not.w	d0				* cmp.l #-1,d0 の代わり
+		beq	screen_end			* すべてが -1 （無指定）
 ********************************
-		moveq	#1,d1				* �Đݒ�t���O �� ON �ɂ��Ă���
+		moveq	#1,d1				* 再設定フラグ を ON にしておく
 		cmp.w	#-1,d3
-		beq	get_current			* width �͖��w��
+		beq	get_current			* width は無指定
 
 		cmp.w	#-1,d4
-		beq	get_current			* graphicmode �͖��w��
+		beq	get_current			* graphicmode は無指定
 		*
-		*  width �� graphicmode �̗������w��L��
+		*  width と graphicmode の両方が指定有り
 		*
 		move.w	d4,d2
 		tst.w	d3
@@ -53,71 +53,71 @@ cmd_screen:
 ****************
 get_current:
 		*
-		*  width �� graphicmode �̏��Ȃ��Ƃ��ǂ��炩�͖��w��
+		*  width と graphicmode の少なくともどちらかは無指定
 		*
 		move.w	#-1,-(a7)
 		move.w	#16,-(a7)
 		DOS	_CONCTRL
 		addq.l	#4,a7
-		move.w	d0,d2				* ���݂̃��[�h�� D2 ��
+		move.w	d0,d2				* 現在のモードを D2 に
 		cmp.w	#-1,d3
-		bne	width_specified			* width �͎w��L��
+		bne	width_specified			* width は指定有り
 
 		cmp.w	#-1,d4
-		bne	graphicmode_specified		* graphicmode �͎w��L��
+		bne	graphicmode_specified		* graphicmode は指定有り
 		*
-		* width �� graphicmode ���ύX���Ȃ�
+		* width も graphicmode も変更しない
 		*
-		clr.w	d1				* �Đݒ�t���O OFF
+		clr.w	d1				* 再設定フラグ OFF
 		bra	width_and_graphicmode_ok
 ****************
 graphicmode_specified:
 		*
-		* width ��ς����� graphicmode ���w��l�ɕύX����
+		* width を変えずに graphicmode を指定値に変更する
 		*
 		cmp.w	#2,d2
 		blo	change_graphicmode_on_width_0
 
-		move.w	d4,d2				* ���݂� width �� 1 �ł��邩��
-		bra	change_graphicmode_on_width_1	* ���[�h�� 2 + graphicmode �Ƃ���
+		move.w	d4,d2				* 現在の width は 1 であるから
+		bra	change_graphicmode_on_width_1	* モードは 2 + graphicmode とする
 
 change_graphicmode_on_width_0:
-		cmp.w	#2,d4				* ���݂� width �� 0 �ł��邩��
-		bhs	error				* 2 �ȏ�� graphicmode �̓G���[
+		cmp.w	#2,d4				* 現在の width は 0 であるから
+		bhs	error				* 2 以上の graphicmode はエラー
 
 		move.w	d4,d2
-		bra	width_and_graphicmode_ok	* ���[�h�� graphicmode �Ƃ���
+		bra	width_and_graphicmode_ok	* モードは graphicmode とする
 ****************
 width_specified:
 		*
-		*  graphicmode ��ς����� width ���w��l�ɕύX
+		*  graphicmode を変えずに width を指定値に変更
 		*
 		tst.w	d3
 		beq	change_width_to_0
 
 change_width_to_1:
 		*
-		* graphicmode ��ς����� width �� 1 �ɕύX
+		* graphicmode を変えずに width を 1 に変更
 		*
-		cmp.w	#2,d2				* ���݂̃��[�h�� 2 �ȏ�Ȃ��
-		bhs	width_and_graphicmode_ok	* ���̂܂܂� OK
+		cmp.w	#2,d2				* 現在のモードが 2 以上ならば
+		bhs	width_and_graphicmode_ok	* そのままで OK
 
 change_graphicmode_on_width_1:
-		add.w	#2,d2				* ���[�h�� 2 ��������
+		add.w	#2,d2				* モードに 2 を加える
 		bra	width_and_graphicmode_ok
 
 change_width_to_0:
 		*
-		* graphicmode ��ς����� width �� 0 �ɕύX
+		* graphicmode を変えずに width を 0 に変更
 		*
-		cmp.w	#2,d2				* ���݂̃��[�h�� 0 �� 1 �Ȃ��
-		blo	width_and_graphicmode_ok	* ���̂܂܂� OK
+		cmp.w	#2,d2				* 現在のモードが 0 か 1 ならば
+		blo	width_and_graphicmode_ok	* そのままで OK
 
-		sub.w	#2,d2				* 2 �Ȃ�� 0 �ɁA3 �Ȃ�� 1 �ɁA
+		sub.w	#2,d2				* 2 ならば 0 に、3 ならば 1 に、
 		cmp.w	#2,d2
 		blo	width_and_graphicmode_ok
 
-		moveq	#1,d2				* 4 �ȏ�Ȃ�� 1 �ɂ���
+		moveq	#1,d2				* 4 以上ならば 1 にする
 ****************
 width_and_graphicmode_ok:
 		cmp.w	#-1,d5
@@ -129,8 +129,8 @@ width_and_graphicmode_ok:
 		cmp.w	#2,d2
 		bne	all_fixed
 check_graphic:
-		btst	#0,d5			* ���[�h�� 0 �܂��� 2 �ł���ꍇ�A
-		bne	error			* displaymode �� 1 �܂��� 3 ���w�肷�邱�Ƃ͂ł��Ȃ�
+		btst	#0,d5			* モードが 0 または 2 である場合、
+		bne	error			* displaymode に 1 または 3 を指定することはできない
 all_fixed:
 		tst.w	d1
 		beq	change_displaymode
@@ -246,25 +246,25 @@ error:
 ****************************************************************
 .data
 
-msg_bad_arg:	dc.b	"�p�����|�^�������ł�",CR,LF,LF
-		dc.b	"�g�p�@: screen [[��ʕ�],[[�O���t�B�b�N���[�h],[�\�����[�h]]]",CR,LF,LF
-		dc.b	"��ʕ�:",CR,LF
-		dc.b	HT,"0: ��96�����i�O���t�B�b�N768x512�h�b�g�j���[�h",CR,LF
-		dc.b	HT,"1: ��64�����i�O���t�B�b�N512x512�h�b�g�j���[�h",CR,LF,LF
-		dc.b	"�O���t�B�b�N���[�h:",CR,LF
-		dc.b	HT,"0: �O���t�B�b�N����",CR,LF
-		dc.b	HT,"1: �O���t�B�b�N16�F",CR,LF
-		dc.b	HT,"2: �O���t�B�b�N256�F",CR,LF
-		dc.b	HT,"3: �O���t�B�b�N65536�F",CR,LF
-		dc.b	"�i��ʕ���'0'�̂Ƃ��C�O���t�B�b�N���[�h'2'��'3'�͖����j",CR,LF,LF
-		dc.b	"�\�����[�h:",CR,LF
-		dc.b	HT,"0: �e�L�X�g��\��",CR,LF
-		dc.b	HT,"1: �e�L�X�g�C�O���t�B�b�N��\��",CR,LF
-		dc.b	HT,"2: �e�L�X�g�C�X�v���C�g��\��",CR,LF
-		dc.b	HT,"3: �e�L�X�g�C�O���t�B�b�N�C�X�v���C�g��\��",CR,LF
-		dc.b	"�i�O���t�B�b�N���[�h��'0'�̂Ƃ��C�\�����[�h'1'��'3'�͖����j",CR,LF,LF
-		dc.b	"�ȗ������p�����[�^�͌��݂̐ݒ�̂܂܂Ƃ��܂�",CR,LF
-		dc.b	"�������C�p�����[�^����ؖ����ꍇ�͊e�p�����[�^��'0'�Ƃ��܂�",CR,LF
+msg_bad_arg:	dc.b	"パラメ−タが無効です",CR,LF,LF
+		dc.b	"使用法: screen [[画面幅],[[グラフィックモード],[表示モード]]]",CR,LF,LF
+		dc.b	"画面幅:",CR,LF
+		dc.b	HT,"0: 横96文字（グラフィック768x512ドット）モード",CR,LF
+		dc.b	HT,"1: 横64文字（グラフィック512x512ドット）モード",CR,LF,LF
+		dc.b	"グラフィックモード:",CR,LF
+		dc.b	HT,"0: グラフィック無し",CR,LF
+		dc.b	HT,"1: グラフィック16色",CR,LF
+		dc.b	HT,"2: グラフィック256色",CR,LF
+		dc.b	HT,"3: グラフィック65536色",CR,LF
+		dc.b	"（画面幅が'0'のとき，グラフィックモード'2'と'3'は無効）",CR,LF,LF
+		dc.b	"表示モード:",CR,LF
+		dc.b	HT,"0: テキストを表示",CR,LF
+		dc.b	HT,"1: テキスト，グラフィックを表示",CR,LF
+		dc.b	HT,"2: テキスト，スプライトを表示",CR,LF
+		dc.b	HT,"3: テキスト，グラフィック，スプライトを表示",CR,LF
+		dc.b	"（グラフィックモードが'0'のとき，表示モード'1'と'3'は無効）",CR,LF,LF
+		dc.b	"省略したパラメータは現在の設定のままとします",CR,LF
+		dc.b	"ただし，パラメータが一切無い場合は各パラメータを'0'とします",CR,LF
 msg_bad_arg_bottom:
 ****************************************************************
 .bss

@@ -25,10 +25,10 @@ start:
 		bra.s	start1
 		dc.b	'#HUPAIR',0
 start1:
-		move.l	8(a0),d6			*  ‚±‚Ìƒƒ‚ƒŠƒuƒƒbƒN‚ÌI‚í‚è{‚P
+		move.l	8(a0),d6			*  ã“ã®ãƒ¡ãƒ¢ãƒªãƒ–ãƒ­ãƒƒã‚¯ã®çµ‚ã‚ã‚Šï¼‹ï¼‘
 		sub.l	a0,d6
-		sub.l	#16,d6				*  D6.L : Å‘å‚Ì‹ó‚«ƒƒ‚ƒŠ‚Ì‘å‚«‚³
-		move.l	d6,d7				*  D7.L : ‹ó‚«ƒƒ‚ƒŠ‚Ì‘—Ê
+		sub.l	#16,d6				*  D6.L : æœ€å¤§ã®ç©ºããƒ¡ãƒ¢ãƒªã®å¤§ãã•
+		move.l	d6,d7				*  D7.L : ç©ºããƒ¡ãƒ¢ãƒªã®ç·é‡
 		lea	bsstop(pc),a6
 		lea	stack(a6),a7
 
@@ -74,23 +74,23 @@ mf_start:
 		move.l	d6,d0
 		bsr	print1
 get_size_loop:
-		move.l	#$00ffffff,-(a7)		*  ‚±‚ñŒÀ‚è
-		DOS	_MALLOC				*  Šm•Û‚µ‚Ä‚İ‚é
+		move.l	#$00ffffff,-(a7)		*  ã“ã‚“é™ã‚Š
+		DOS	_MALLOC				*  ç¢ºä¿ã—ã¦ã¿ã‚‹
 		addq.l	#4,a7
 		sub.l	#$81000000,d0
-		move.l	d0,d3				*  D3 : Šm•Û‰Â”\‚È‘å‚«‚³
-		move.l	d0,-(a7)			*  ‚»‚ê‚ğ
-		DOS	_MALLOC				*  Šm•Û‚µ‚Ä‚İ‚é
+		move.l	d0,d3				*  D3 : ç¢ºä¿å¯èƒ½ãªå¤§ãã•
+		move.l	d0,-(a7)			*  ãã‚Œã‚’
+		DOS	_MALLOC				*  ç¢ºä¿ã—ã¦ã¿ã‚‹
 		addq.l	#4,a7
 		tst.l	d0
-		bmi	count_done			*  ‚±‚êˆÈãŠm•Û‚Å‚«‚È‚¢
+		bmi	count_done			*  ã“ã‚Œä»¥ä¸Šç¢ºä¿ã§ããªã„
 
-		cmp.l	d3,d6				*  ¡Šm•Û‚µ‚½ƒuƒƒbƒN‚ª
-		bhs	max_ok				*  D6 ‚æ‚è‚à‘å‚«‚¯‚ê‚Î
+		cmp.l	d3,d6				*  ä»Šç¢ºä¿ã—ãŸãƒ–ãƒ­ãƒƒã‚¯ãŒ
+		bhs	max_ok				*  D6 ã‚ˆã‚Šã‚‚å¤§ãã‘ã‚Œã°
 
-		move.l	d3,d6				*  D6 ‚ğXV
+		move.l	d3,d6				*  D6 ã‚’æ›´æ–°
 max_ok:
-		add.l	d3,d7				*  ¡Šm•Û‚µ‚½‘å‚«‚³‚ğ D7 ‚É‰Á‚¦‚é
+		add.l	d3,d7				*  ä»Šç¢ºä¿ã—ãŸå¤§ãã•ã‚’ D7 ã«åŠ ãˆã‚‹
 		tst.b	print_all(a6)
 		beq	get_size_loop
 
@@ -163,14 +163,14 @@ word_all:		dc.b	'all',0
 word_total:		dc.b	'total',0
 word_max:		dc.b	'max',0
 
-msg_max:		dc.b	HT,'Å‘å',CR,LF,0
-msg_total:		dc.b	HT,'‘Œv'
+msg_max:		dc.b	HT,'æœ€å¤§',CR,LF,0
+msg_total:		dc.b	HT,'ç·è¨ˆ'
 msg_newline:		dc.b	CR,LF,0
 
-msg_usage:		dc.b	'g—p–@:  mf [ all | total | max ]',CR,LF
+msg_usage:		dc.b	'ä½¿ç”¨æ³•:  mf [ all | total | max ]',CR,LF
 msg_usage_bot:
 
-msg_write_fail:		dc.b	'wc: o—ÍƒGƒ‰[',CR,LF
+msg_write_fail:		dc.b	'wc: å‡ºåŠ›ã‚¨ãƒ©ãƒ¼',CR,LF
 msg_write_fail_bot:
 *****************************************************************
 .bss

@@ -126,10 +126,10 @@ skip_space_return:
 
 msg_off:	dc.b	'off',0
 msg_on:		dc.b	'on',0
-msg_1:		dc.b	'verify ‚Í <',0
-msg_2:		dc.b	'> ‚Å‚·',CR,LF,0
-msg_bad_arg:	dc.b	'ƒpƒ‰ƒ|ƒ^‚ª–³Œø‚Å‚·',CR,LF
-		dc.b	'g—p–@: cverify [ on | off ]',CR,LF
+msg_1:		dc.b	'verify ã¯ <',0
+msg_2:		dc.b	'> ã§ã™',CR,LF,0
+msg_bad_arg:	dc.b	'ãƒ‘ãƒ©ãƒ¡âˆ’ã‚¿ãŒç„¡åŠ¹ã§ã™',CR,LF
+		dc.b	'ä½¿ç”¨æ³•: cverify [ on | off ]',CR,LF
 ****************************************************************
 .bss
 		ds.b	STACKSIZE

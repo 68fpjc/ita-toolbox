@@ -26,7 +26,7 @@
 .xref fclose
 .xref chdir
 
-** ‰Â•Ï’è”
+** å¯å¤‰å®šæ•°
 MAXLOGNAME	equ	64
 CMDLINE_SIZE	equ	256
 
@@ -36,20 +36,20 @@ STACKSIZE	equ	512
 
 start:
 		bra.s	start1
-		dc.b	'#HUPAIR',0			*  HUPAIR“K‡éŒ¾
+		dc.b	'#HUPAIR',0			*  HUPAIRé©åˆå®£è¨€
 start1:
-		move.l	8(a0),a5			*  A5 := —^‚¦‚ç‚ê‚½ƒƒ‚ƒŠ‚Ì’ê
-		lea	bsstop(pc),a6			*  A6 := BSS‚Ìæ“ªƒAƒhƒŒƒX
-		lea	stack_bottom(a6),a7		*  A7 := ƒXƒ^ƒbƒN‚Ì’ê
-		move.l	a3,getty_envp(a6)		*  ŠÂ‹«‚ÌƒAƒhƒŒƒX‚ğ‹L‰¯‚·‚é
+		move.l	8(a0),a5			*  A5 := ä¸ãˆã‚‰ã‚ŒãŸãƒ¡ãƒ¢ãƒªã®åº•
+		lea	bsstop(pc),a6			*  A6 := BSSã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	stack_bottom(a6),a7		*  A7 := ã‚¹ã‚¿ãƒƒã‚¯ã®åº•
+		move.l	a3,getty_envp(a6)		*  ç’°å¢ƒã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨˜æ†¶ã™ã‚‹
 		clr.l	user_envp(a6)
 	*
-	*  getty©g‚ÌƒJƒŒƒ“ƒgEƒfƒBƒŒƒNƒgƒŠ‚ğ•Û‘¶‚·‚é
+	*  gettyè‡ªèº«ã®ã‚«ãƒ¬ãƒ³ãƒˆãƒ»ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä¿å­˜ã™ã‚‹
 	*
 		lea	getty_cwd(a6),a0
 		bsr	getcwd
 	*
-	*  •W€“ü—Í‚ª’[––‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN‚·‚é
+	*  æ¨™æº–å…¥åŠ›ãŒç«¯æœ«ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	*
 		clr.l	-(a7)
 		DOS	_IOCTRL
@@ -57,20 +57,20 @@ start1:
 		btst	#7,d0				*  character=1/block=0
 		beq	not_a_tty
 	*
-	*  ˆø”‚ğƒfƒR[ƒh‚µC‰ğß‚·‚é
+	*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã—ï¼Œè§£é‡ˆã™ã‚‹
 	*
 		clr.b	logname(a6)
 
-		lea	envarg_top(a6),a1	*  A1 := ˆø”•À‚Ñ‚ğŠi”[‚·‚éƒGƒŠƒA‚Ìæ“ªƒAƒhƒŒƒX
-		lea	1(a2),a0		*  A0 := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ìæ“ªƒAƒhƒŒƒX
-		bsr	strlen			*  D0.L ‚É A0 ‚ª¦‚·•¶š—ñ‚Ì’·‚³‚ğ‹‚ßC
-		add.l	a1,d0			*    Ši”[ƒGƒŠƒA‚Ì—e—Ê‚ğ
-		cmp.l	a5,d0			*    ƒ`ƒFƒbƒN‚·‚é
+		lea	envarg_top(a6),a1	*  A1 := å¼•æ•°ä¸¦ã³ã‚’æ ¼ç´ã™ã‚‹ã‚¨ãƒªã‚¢ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	1(a2),a0		*  A0 := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		bsr	strlen			*  D0.L ã« A0 ãŒç¤ºã™æ–‡å­—åˆ—ã®é•·ã•ã‚’æ±‚ã‚ï¼Œ
+		add.l	a1,d0			*    æ ¼ç´ã‚¨ãƒªã‚¢ã®å®¹é‡ã‚’
+		cmp.l	a5,d0			*    ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		bhs	insufficient_memory
 
-		bsr	DecodeHUPAIR			*  ƒfƒR[ƒh‚·‚é
+		bsr	DecodeHUPAIR			*  ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹
 	*
-	*  c‚è‚Ìˆø”‚ğƒXƒ^ƒbƒN‚Ì’¼Œã‚É•Û‘¶‚·‚é
+	*  æ®‹ã‚Šã®å¼•æ•°ã‚’ã‚¹ã‚¿ãƒƒã‚¯ã®ç›´å¾Œã«ä¿å­˜ã™ã‚‹
 	*
 		move.l	d0,d1
 		lea	envarg_top(a6),a0
@@ -82,10 +82,10 @@ move_envarg_continue:
 		subq.l	#1,d1
 		bcc	move_envarg_loop
 	*
-	*  è—Lƒƒ‚ƒŠ‚ğØ‚è‹l‚ß‚é
+	*  å æœ‰ãƒ¡ãƒ¢ãƒªã‚’åˆ‡ã‚Šè©°ã‚ã‚‹
 	*
 		DOS	_GETPDB
-		movea.l	d0,a1				*  A1 : PDBƒAƒhƒŒƒX
+		movea.l	d0,a1				*  A1 : PDBã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d0
 		sub.l	a1,d0
 		move.l	d0,-(a7)
@@ -93,7 +93,7 @@ move_envarg_continue:
 		DOS	_SETBLOCK
 		addq.l	#8,a7
 	*
-	*  ƒVƒOƒiƒ‹ˆ—ƒ‹[ƒ`ƒ“‚ğİ’è‚·‚é
+	*  ã‚·ã‚°ãƒŠãƒ«å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³ã‚’è¨­å®šã™ã‚‹
 	*
 		st	in_me
 		pea	manage_interrupt_signal(pc)
@@ -106,7 +106,7 @@ move_envarg_continue:
 		addq.l	#6,a7
 re_ask_logname:
 	*
-	*  ƒƒOƒCƒ“–¼‚ğ“ü—Í‚·‚é
+	*  ãƒ­ã‚°ã‚¤ãƒ³åã‚’å…¥åŠ›ã™ã‚‹
 	*
 		lea	msg_login(pc),a1
 		lea	logname(a6),a0
@@ -122,7 +122,7 @@ check_logname_loop:
 		bsr	isalnum
 		bne	check_logname_loop
 	*
-	*  ƒ†[ƒU‚ÌƒVƒFƒ‹‚Æƒpƒ‰ƒ[ƒ^‚ğŒˆ’è‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ã‚·ã‚§ãƒ«ã¨ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’æ±ºå®šã™ã‚‹
 	*
 		lea	default_login(pc),a1
 		lea	program_pathname(a6),a0
@@ -147,16 +147,16 @@ check_logname_loop:
 		bsr	SetHUPAIR
 		bmi	too_long_args_for_program
 	*
-	*  ƒ†[ƒU‚ÌŠÂ‹«‚ğì¬‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã‚’ä½œæˆã™ã‚‹
 	*
 		*
-		*  ƒ†[ƒU‚ÌŠÂ‹«‚Ì‚½‚ß‚ÉÅ‘åƒuƒƒbƒN‚ğŠm•Û‚·‚é
+		*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã®ãŸã‚ã«æœ€å¤§ãƒ–ãƒ­ãƒƒã‚¯ã‚’ç¢ºä¿ã™ã‚‹
 		*
 		move.l	#$00ffffff,-(a7)
 		DOS	_MALLOC
 		addq.l	#4,a7
 		sub.l	#$81000000,d0
-		move.l	d0,d1				*  D1.L : Šm•Û‰Â”\‚È‘å‚«‚³
+		move.l	d0,d1				*  D1.L : ç¢ºä¿å¯èƒ½ãªå¤§ãã•
 		cmp.l	#5,d1
 		blo	insufficient_memory
 
@@ -167,12 +167,12 @@ check_logname_loop:
 		bmi	insufficient_memory
 
 		move.l	d0,user_envp(a6)
-		movea.l	d0,a3				*  A3 : ƒ†[ƒU‚ÌŠÂ‹«
+		movea.l	d0,a3				*  A3 : ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒ
 		movea.l	a3,a2
 		move.l	d1,(a2)+
 		subq.l	#5,d1
 		*
-		*  getty‚ÌŠÂ‹«‚ğŒp³‚·‚é
+		*  gettyã®ç’°å¢ƒã‚’ç¶™æ‰¿ã™ã‚‹
 		*
 		movea.l	getty_envp(a6),a0
 		cmpa.l	#-1,a0
@@ -202,7 +202,7 @@ dupenv_next:
 dupenv_done:
 		clr.b	(a2)
 		*
-		*  ƒ†[ƒU‚ÌŠÂ‹«‚ğØ‚è‹l‚ß‚é
+		*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã‚’åˆ‡ã‚Šè©°ã‚ã‚‹
 		*
 		lea	4(a3),a0
 		bsr	strazbot
@@ -216,13 +216,13 @@ dupenv_done:
 		DOS	_SETBLOCK
 		addq.l	#8,a7
 	*
-	*  ƒ†[ƒU‚ÌƒVƒFƒ‹‚ğexec‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ã‚·ã‚§ãƒ«ã‚’execã™ã‚‹
 	*
 		sf	in_me
-		move.l	user_envp(a6),-(a7)		*  ƒ†[ƒU‚ÌŠÂ‹«‚ÌƒAƒhƒŒƒX
-		pea	program_args(a6)		*  ‹N“®‚·‚éƒvƒƒOƒ‰ƒ€‚Ö‚Ìˆø”‚ÌƒAƒhƒŒƒX
-		pea	program_pathname(a6)		*  ‹N“®‚·‚éƒvƒƒOƒ‰ƒ€‚ÌƒpƒX–¼‚ÌƒAƒhƒŒƒX
-		clr.w	-(a7)				*  ƒtƒ@ƒ“ƒNƒVƒ‡ƒ“FLOAD&EXEC
+		move.l	user_envp(a6),-(a7)		*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		pea	program_args(a6)		*  èµ·å‹•ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¸ã®å¼•æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		pea	program_pathname(a6)		*  èµ·å‹•ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ‘ã‚¹åã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		clr.w	-(a7)				*  ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³ï¼šLOAD&EXEC
 		DOS	_EXEC
 		lea	14(a7),a7
 		lea	bsstop(pc),a6
@@ -240,7 +240,7 @@ done_getty_0:
 		moveq	#0,d0
 done_getty:
 	*
-	*  I—¹‚·‚é
+	*  çµ‚äº†ã™ã‚‹
 	*
 		bsr	reset_getty
 do_exit:
@@ -345,15 +345,15 @@ xfclose_done:
 		move.l	(a7)+,d0
 		rts
 ****************************************************************
-* getname - •W€“ü—Í‚©‚çƒGƒR[•t‚«‚Å1s“ü—Í‚·‚éiCR‚Ü‚½‚ÍLF‚Ü‚Åj
+* getname - æ¨™æº–å…¥åŠ›ã‹ã‚‰ã‚¨ã‚³ãƒ¼ä»˜ãã§1è¡Œå…¥åŠ›ã™ã‚‹ï¼ˆCRã¾ãŸã¯LFã¾ã§ï¼‰
 *
 * CALL
-*      A0     “ü—Íƒoƒbƒtƒ@
-*      D0.L   Å‘å“ü—ÍƒoƒCƒg”iCR‚âLF‚ÍŠÜ‚Ü‚È‚¢j
+*      A0     å…¥åŠ›ãƒãƒƒãƒ•ã‚¡
+*      D0.L   æœ€å¤§å…¥åŠ›ãƒã‚¤ãƒˆæ•°ï¼ˆCRã‚„LFã¯å«ã¾ãªã„ï¼‰
 *
 * RETURN
-*      D0.L   “ü—Í•¶š”iCR‚âLF‚ÍŠÜ‚Ü‚È‚¢j
-*             ‚½‚¾‚µ EOF ‚È‚ç -1
+*      D0.L   å…¥åŠ›æ–‡å­—æ•°ï¼ˆCRã‚„LFã¯å«ã¾ãªã„ï¼‰
+*             ãŸã ã— EOF ãªã‚‰ -1
 *      CCR    TST.L D0
 ****************************************************************
 getname:

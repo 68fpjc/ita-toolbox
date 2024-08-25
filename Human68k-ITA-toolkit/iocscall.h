@@ -182,12 +182,12 @@ _TXFILL		equ	$d7
 _TXREV		equ	$d8
 _TXRASCPY	equ	$df
 *
-* �ȉ��̂h�n�b�r���g���ɂ͂e�l�����f�o�C�X�h���C�o���g�ݍ��܂�Ă���
-* �K�v������܂��B
+* 以下のＩＯＣＳを使うにはＦＭ音源デバイスドライバが組み込まれている
+* 必要があります。
 *
 _OPMDRV		equ	$f0
 *
-* ����ȉ��̂h�n�b�r�̓V�X�e����p�ł��B�g�p���Ă͂����܂���B
+* これ以下のＩＯＣＳはシステム専用です。使用してはいけません。
 *
 _SKEYSET	equ	$05
 _TPALET2	equ	$14

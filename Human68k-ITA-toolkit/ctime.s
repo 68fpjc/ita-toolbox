@@ -520,12 +520,12 @@ itoa_tbl:
 		dc.l	1
 		dc.l	0
 
-msg_datetime1:	dc.b	'Œ»İ‚Ì'
-msg_time:	dc.b	'',0
-msg_datetime2:	dc.b	'‚Í ',0
-msg_datetime3:	dc.b	' ‚Å‚·',CR,LF,0
-msg_datetime4:	dc.b	'‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢: ',0
-msg_datetime5:	dc.b	'‚Ìw’è‚ªˆá‚¢‚Ü‚·'
+msg_datetime1:	dc.b	'ç¾åœ¨ã®'
+msg_time:	dc.b	'æ™‚åˆ»',0
+msg_datetime2:	dc.b	'ã¯ ',0
+msg_datetime3:	dc.b	' ã§ã™',CR,LF,0
+msg_datetime4:	dc.b	'ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„: ',0
+msg_datetime5:	dc.b	'ã®æŒ‡å®šãŒé•ã„ã¾ã™'
 msg_crlf:	dc.b	CR,LF,0
 *****************************************************************
 .bss

@@ -5,122 +5,122 @@ LOGIN(1)       Human68k ITA TOOLBOX User's Manual        LOGIN(1)
 
 
 
-����
-     login - Human68k �ւ̃��O�C��
+名称
+     login - Human68k へのログイン
 
-�`��
+形式
      login [ -p ] [ name [ env-var ... ] ]
 
-���
-     login �R�}���h���g���ړI�� 2����܂��D���� 1�́CHuman68k
-     �𗘗p����������[�U���ɁC���邢�͍�Ɠ��e���ɐU�蕪���邱
-     �Ƃł��D�p�X���[�h�E�t�@�C���ɂ���āC���[�U���Ɋ���U�蕪
-     ���C�܂��C�񃆁[�U�̗��p��r�����܂��Dlogin �R�}���h�́C���[
-     �U���V�X�e���̎g�p���J�n����ۂɎg���鑼�C���̃��[�U�ֈꎞ
-     �I�ɕύX����ۂɂ��g�����Ƃ��ł��܂��D�܂��C����̏��������[
-     �U�̊��Ɉˑ������Ɋm���Ɏ��s���邽�߂ɂ��g���܂��D
+解説
+     login コマンドを使う目的は 2つあります．その 1つは，Human68k
+     を利用する環境をユーザ毎に，あるいは作業内容毎に振り分けるこ
+     とです．パスワード・ファイルによって，ユーザ毎に環境を振り分
+     け，また，非ユーザの利用を排除します．login コマンドは，ユー
+     ザがシステムの使用を開始する際に使われる他，他のユーザへ一時
+     的に変更する際にも使うことができます．また，特定の処理をユー
+     ザの環境に依存せずに確実に実行するためにも使われます．
 
-     login �R�}���h���g���ړI�̂��� 1�́Cfish(1) �����O�C���E�V�F
-     ���Ƃ��ċN�����邱�Ƃł��Dfish(1) �� login(1) ����N�������
-     �Ǝ����I�Ƀ��O�C���E�V�F���ƂȂ�܂��D�V�X�e���E�t�@�C��
-     CONFIG.SYS(5) �� SHELL=A:\bin\fish.x �̂悤�ɋL�q������C
-     Human68k �̃v�����v�g # �ɑ΂��� A:\bin\fish �̂悤�ɓ��͂�
-     �� Human68k ���璼�ڋN�����邱�Ƃɂ���Ă� fish(1) �����O�C
-     ���E�V�F���Ƃ��ē��삳���邱�Ƃ��ł��܂����C���̏ꍇ�C
-     fish(1) ���I������� Human68k �̃v�����v�g # �ɖ߂��Ă��܂�
-     ���߁C�s�ւł��Dlogin �R�}���h���V�X�e���̍����ɒu���΁C����
-     �s�ւ��͉�������܂��D����͈�ʓI�ɂ́CCONFIG.SYS ��
+     login コマンドを使う目的のもう 1つは，fish(1) をログイン・シェ
+     ルとして起動することです．fish(1) は login(1) から起動される
+     と自動的にログイン・シェルとなります．システム・ファイル
+     CONFIG.SYS(5) に SHELL=A:\bin\fish.x のように記述したり，
+     Human68k のプロンプト # に対して A:\bin\fish のように入力し
+     て Human68k から直接起動することによっても fish(1) をログイ
+     ン・シェルとして動作させることができますが，この場合，
+     fish(1) を終了すると Human68k のプロンプト # に戻ってしまう
+     ため，不便です．login コマンドをシステムの根元に置けば，この
+     不便さは解消されます．これは一般的には，CONFIG.SYS に
 
           SHELL=A:/bin/login.x
 
-     �̂悤�ɋL�q���Ă������ƂŎ����ł��܂��D
+     のように記述しておくことで実現できます．
 
-     login �R�}���h�������Ȃ��ŋN������ƁC���[�U�̃��O�C������q
-     �˂Ă��܂��D���͕�����̑O��̋󔒂͍폜���܂��D���� name ��
-     �w�肷��ƁCname �����O�C�����Ƃ��Ď󗝂��܂��D
+     login コマンドを引数なしで起動すると，ユーザのログイン名を尋
+     ねてきます．入力文字列の前後の空白は削除します．引数 name を
+     指定すると，name をログイン名として受理します．
 
-     ���ɁC�K�v�ȏꍇ�ɂ̓p�X���[�h��q�˂Ă��܂��D�p�X���[�h�̓�
-     �͒��́C�\�ł���΃G�R�[�E�o�b�N���I�t�ɂȂ�̂ŁC�p�X���[
-     �h�͍�ƒ��̕\���o�͂ɂ͕\���܂���D�p�X���[�h�̓��͒��́C
-     ���s�ȊO�̂��ׂĂ̓��̓L�����N�^�������Ƃ��ē��͂���܂��̂ŁC
-     ^C �ɂ���Ē��f���邱�Ƃ͂ł��܂���D
+     次に，必要な場合にはパスワードを尋ねてきます．パスワードの入
+     力中は，可能であればエコー・バックがオフになるので，パスワー
+     ドは作業中の表示出力には表われません．パスワードの入力中は，
+     改行以外のすべての入力キャラクタが文字として入力されますので，
+     ^C によって中断することはできません．
 
-     ���O�C���ɐ�������ƁClogin �̓t�@�C�� $SYSROOT/etc/motd ��
-     ���e��\�����܂��D���������O�C���E���[�U�̃z�[���E�f�B���N�g
-     ���Ƀt�@�C�� %hushlogin ������ꍇ�ɂ́C���̕\���͍s���܂���D
+     ログインに成功すると，login はファイル $SYSROOT/etc/motd の
+     内容を表示します．ただしログイン・ユーザのホーム・ディレクト
+     リにファイル %hushlogin がある場合には，この表示は行いません．
 
-     login �̓p�X���[�h�t�@�C�����̎w��ɂ��������ă��O�C���E���[
-     �U�̃z�[���E�f�B���N�g�����J�����g�E�f�B���N�g���Ƃ��C�p�X���[
-     �h�t�@�C�����̎w��ɂ��������ăV�F���E�v���O�������N�����܂��D
+     login はパスワードファイル内の指定にしたがってログイン・ユー
+     ザのホーム・ディレクトリをカレント・ディレクトリとし，パスワー
+     ドファイル内の指定にしたがってシェル・プログラムを起動します．
 
-     ���[�U�́i���O�C���E�V�F���ɓn�����j���ϐ��́C�ȉ��̂悤
-     �ɏ����ݒ肳��Ă��܂��D
+     ユーザの（ログイン・シェルに渡される）環境変数は，以下のよう
+     に初期設定されています．
 
-          LOGNAME=���[�U�̃��O�C�����i���[�U���j
-          USER=���[�U��
-          HOME=���[�U�̃��O�C���i�z�[���j�E�f�B���N�g��
-          SHELL=�V�F���E�v���O�����̃p�X��
-          SYSROOT=�V�X�e���̃��[�g�E�f�B���N�g��
+          LOGNAME=ユーザのログイン名（ユーザ名）
+          USER=ユーザ名
+          HOME=ユーザのログイン（ホーム）・ディレクトリ
+          SHELL=シェル・プログラムのパス名
+          SYSROOT=システムのルート・ディレクトリ
 
-     SYSROOT �́Clogin ���g�̊����̂��̂ł��Dlogin �����ϐ�
-     SYSROOT �������Ă��Ȃ���΃��[�U�̊��ł�����`�ƂȂ�܂��D
+     SYSROOT は，login 自身の環境そのものです．login が環境変数
+     SYSROOT を持っていなければユーザの環境でも未定義となります．
 
-     ���̊��ϐ��͔j������܂����C�e-p�f�I�v�V�������w�肷��΁C
-     ���̊��ϐ����ۑ�����܂��D
+     他の環境変数は破棄されますが，‘-p’オプションを指定すれば，
+     他の環境変数も保存されます．
 
-     ���� env-var ... �̓��[�U�̊��ɒǉ�����܂��D������ bar ��
-     ���� foo=bar �̌`�����Ƃ邱�Ƃ��ł��܂��D�e=�f���܂܂�Ă���
-     ������ bar �͎��̂悤�Ƀ��[�U�̊��ɒ�`����܂��D
+     引数 env-var ... はユーザの環境に追加されます．引数は bar ま
+     たは foo=bar の形式をとることができます．‘=’が含まれていな
+     い引数 bar は次のようにユーザの環境に定義されます．
 
           Ln=bar
 
-     �����ŁCn �� 0 ����n�܂�10�i�����ŁC�V�����ϐ����Z�b�g����
-     �x�ɃC���N�������g���܂��D
+     ここで，n は 0 から始まる10進整数で，新しい変数をセットする
+     度にインクリメントします．
 
-     �e=�f���܂ވ��� foo=bar �́C���̂܂܃��[�U�̊��ɃZ�b�g����
-     �܂��D
+     ‘=’を含む引数 foo=bar は，そのままユーザの環境にセットされ
+     ます．
 
-     ���[�U�̃V�F���ɓn�������̈�̑傫���͂��ׂĂ̕ϐ�������
-     ���ǎ��܂�傫���ɐ؂�l�߂��Ă��܂��D
+     ユーザのシェルに渡される環境領域の大きさはすべての変数がちょ
+     うど収まる大きさに切り詰められています．
 
-     ���O�C���E�V�F�����I������ƍĂ� login �v���O���������삵�C
-     ���[�U�̃��O�C������q�˂邱�Ƃ���n�܂��A�̃Z�b�V�������J
-     ��Ԃ���܂��D�V�F������ login �R�}���h���N�������ꍇ�ɂ́C
-     ���[�U�̃��O�C������q�˂��Ă���Ƃ��� ^C ����͂��� login
-     �R�}���h���I�����邱�Ƃ��ł��܂��Dlogin �ɐe�v���Z�X���Ȃ���
-     ���iCONFIG.SYS �� SHELL= �ɂ���� login ���N�������ꍇ�Ȃǁj
-     �ɂ� login �R�}���h�́C^C ��G���[�ɂ�钆�f�𖳎����C������
-     �I�����܂���D
+     ログイン・シェルが終了すると再び login プログラムが動作し，
+     ユーザのログイン名を尋ねることから始まる一連のセッションが繰
+     り返されます．シェルから login コマンドを起動した場合には，
+     ユーザのログイン名を尋ねられているときに ^C を入力して login
+     コマンドを終了することができます．login に親プロセスがない場
+     合（CONFIG.SYS の SHELL= によって login を起動した場合など）
+     には login コマンドは，^C やエラーによる中断を無視し，決して
+     終了しません．
 
-     �ʏ�̃t�@�C�� $SYSROOT/etc/nologin �����݂��Ă���΁Clogin
-     �͂��̓��e��\�����C���������ɏI�����܂��D
+     通常のファイル $SYSROOT/etc/nologin が存在していれば，login
+     はその内容を表示し，何もせずに終了します．
 
-���ϐ�
-     SYSROOT        �V�X�e���̃��[�g�E�f�B���N�g��
+環境変数
+     SYSROOT        システムのルート・ディレクトリ
 
-�֘A�t�@�C��
-     $SYSROOT/etc/passwd        �p�X���[�h�t�@�C��
-     $SYSROOT/etc/nologin       ���O�C���̋֎~
-     $SYSROOT/etc/motd          ���O�C���E���b�Z�[�W
-     $HOME/%hushlogin           ���O�C���E���b�Z�[�W�̗}�~
+関連ファイル
+     $SYSROOT/etc/passwd        パスワードファイル
+     $SYSROOT/etc/nologin       ログインの禁止
+     $SYSROOT/etc/motd          ログイン・メッセージ
+     $HOME/%hushlogin           ログイン・メッセージの抑止
 
-�֘A����
+関連事項
      fish(1), motd(5), passwd(5)
 
-����E����
-     Copyright(C)1991 by �_ �j�F (Itagaki Fumihiko)
+制作・著作
+     Copyright(C)1991 by 板垣 史彦 (Itagaki Fumihiko)
 
-�o�O
-     �p�X���[�h�͂܂��Í�������Ă��܂���D�߂������V���� login.x
-     �� passwd.x �R�}���h�Ƌ��ɒ񋟂���C���̂Ƃ��ɂ̓p�X���[�h��
-     �Í�������邱�Ƃł��傤�D���̈Í��͂����ȒP�Ȃ��̂ł��邽��
-     �Ԏq�̎���Ђ˂�悤�ɁC���Ƃ��ȒP�Ɍ��j���邱�Ƃł��傤���C
-     ���j���Ă͂����܂���D:-)
+バグ
+     パスワードはまだ暗号化されていません．近い将来新しい login.x
+     が passwd.x コマンドと共に提供され，そのときにはパスワードは
+     暗号化されることでしょう．その暗号はごく簡単なものであるため
+     赤子の手をひねるように，いとも簡単に見破られることでしょうが，
+     見破ってはいけません．:-)
 
-     �����p�X���[�h�̔��f�͍s�킸�Cpasswd.x ���N�����܂���D
+     陳腐化パスワードの判断は行わず，passwd.x も起動しません．
 
-     ���݂̂Ƃ���Cpwck.x �� getty.x, init.x �͂܂�����܂���D��
-     �����܂��߂������񋟂����ł��傤�D
+     現在のところ，pwck.x や getty.x, init.x はまだありません．こ
+     れらもまた近い将来提供されるでしょう．
 
 
 

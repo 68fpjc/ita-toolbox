@@ -2,7 +2,7 @@
 *
 * Itagaki Fumihiko  8-Jul-91  Create.
 *
-* Usage: rmdir <ƒfƒBƒŒƒNƒgƒŠ> ...
+* Usage: rmdir <ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª> ...
 
 .include doscall.h
 .include error.h
@@ -20,22 +20,22 @@ start:
 		bra.s	start1
 		dc.b	'#HUPAIR',0
 start1:
-		movea.l	8(a0),a5			*  A5 := —^‚¦‚ç‚ê‚½ƒƒ‚ƒŠ‚Ì’ê
+		movea.l	8(a0),a5			*  A5 := ä¸ãˆã‚‰ã‚ŒãŸãƒ¡ãƒ¢ãƒªã®åº•
 		lea	bsstop(pc),a6
 		lea	stack(a6),a7
-		movea.l	a7,a1		*  A1 := ˆø”•À‚Ñ‚ğŠi”[‚·‚éƒGƒŠƒA‚Ìæ“ªƒAƒhƒŒƒX
-		lea	1(a2),a0	*  A0 := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ìæ“ªƒAƒhƒŒƒX
-		bsr	strlen		*  D0.L ‚É A0 ‚ª¦‚·•¶š—ñ‚Ì’·‚³‚ğ‹‚ßC
-		add.l	a1,d0		*    Ši”[ƒGƒŠƒA‚Ì—e—Ê‚ğ
-		cmp.l	a5,d0		*    ƒ`ƒFƒbƒN‚·‚éD
+		movea.l	a7,a1		*  A1 := å¼•æ•°ä¸¦ã³ã‚’æ ¼ç´ã™ã‚‹ã‚¨ãƒªã‚¢ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	1(a2),a0	*  A0 := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		bsr	strlen		*  D0.L ã« A0 ãŒç¤ºã™æ–‡å­—åˆ—ã®é•·ã•ã‚’æ±‚ã‚ï¼Œ
+		add.l	a1,d0		*    æ ¼ç´ã‚¨ãƒªã‚¢ã®å®¹é‡ã‚’
+		cmp.l	a5,d0		*    ãƒã‚§ãƒƒã‚¯ã™ã‚‹ï¼
 		bhs	insufficient_memory
 		*
-		bsr	DecodeHUPAIR	*  ƒfƒR[ƒh‚·‚éD
-		movea.l	a1,a0				*  A0 : ˆø”ƒ|ƒCƒ“ƒ^
-		move.w	d0,d7				*  D7.W : ˆø”ƒJƒEƒ“ƒ^
+		bsr	DecodeHUPAIR	*  ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹ï¼
+		movea.l	a1,a0				*  A0 : å¼•æ•°ãƒã‚¤ãƒ³ã‚¿
+		move.w	d0,d7				*  D7.W : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
 		beq	too_few_args
 
-		moveq	#0,d6				*  D6.W : ƒGƒ‰[EƒR[ƒh
+		moveq	#0,d6				*  D6.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
 		subq.w	#1,d7
 loop:
 		bsr	drvchkp
@@ -167,26 +167,26 @@ perror_table_2:
 	dc.l	msg_media_set_miss	* 259 (-260)
 	dc.l	msg_drive_not_ready	* 260 (-261)
 
-msg_nodir:		dc.b	'‚±‚Ì‚æ‚¤‚ÈƒfƒBƒŒƒNƒgƒŠ‚Í‚ ‚è‚Ü‚¹‚ñ',0
-msg_notdir:		dc.b	'ƒfƒBƒŒƒNƒgƒŠ‚Å‚Í‚ ‚è‚Ü‚¹‚ñ',0
-msg_bad_filename:	dc.b	'–¼‘O‚ª–³Œø‚Å‚·',0
-msg_bad_drive:		dc.b	'ƒhƒ‰ƒCƒu‚Ìw’è‚ª–³Œø‚Å‚·',0
-msg_current:		dc.b	'ƒJƒŒƒ“ƒgEƒfƒBƒŒƒNƒgƒŠ‚Å‚·‚Ì‚Åíœ‚Å‚«‚Ü‚¹‚ñ',0
-msg_write_disabled:	dc.b	'íœ‚Í‹–‰Â‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ',0
-msg_not_empty:		dc.b	'ƒfƒBƒŒƒNƒgƒŠ‚ª‹ó‚Å‚È‚¢‚Ì‚Åíœ‚Å‚«‚Ü‚¹‚ñ',0
-msg_bad_drivename:	dc.b	'ƒhƒ‰ƒCƒu–¼‚ª–³Œø‚Å‚·',0
-msg_no_drive:		dc.b	'ƒhƒ‰ƒCƒu‚ª‚ ‚è‚Ü‚¹‚ñ',0
-msg_no_media_in_drive:	dc.b	'ƒhƒ‰ƒCƒu‚ÉƒƒfƒBƒA‚ªƒZƒbƒg‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ',0
-msg_media_set_miss:	dc.b	'ƒhƒ‰ƒCƒu‚ÉƒƒfƒBƒA‚ª³‚µ‚­ƒZƒbƒg‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ',0
-msg_drive_not_ready:	dc.b	'ƒhƒ‰ƒCƒu‚Ì€”õ‚ª‚Å‚«‚Ä‚¢‚Ü‚¹‚ñ',0
-msg_err:		dc.b	'íœ‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½',0
+msg_nodir:		dc.b	'ã“ã®ã‚ˆã†ãªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¯ã‚ã‚Šã¾ã›ã‚“',0
+msg_notdir:		dc.b	'ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§ã¯ã‚ã‚Šã¾ã›ã‚“',0
+msg_bad_filename:	dc.b	'åå‰ãŒç„¡åŠ¹ã§ã™',0
+msg_bad_drive:		dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–ã®æŒ‡å®šãŒç„¡åŠ¹ã§ã™',0
+msg_current:		dc.b	'ã‚«ãƒ¬ãƒ³ãƒˆãƒ»ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§ã™ã®ã§å‰Šé™¤ã§ãã¾ã›ã‚“',0
+msg_write_disabled:	dc.b	'å‰Šé™¤ã¯è¨±å¯ã•ã‚Œã¦ã„ã¾ã›ã‚“',0
+msg_not_empty:		dc.b	'ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒç©ºã§ãªã„ã®ã§å‰Šé™¤ã§ãã¾ã›ã‚“',0
+msg_bad_drivename:	dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–åãŒç„¡åŠ¹ã§ã™',0
+msg_no_drive:		dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–ãŒã‚ã‚Šã¾ã›ã‚“',0
+msg_no_media_in_drive:	dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–ã«ãƒ¡ãƒ‡ã‚£ã‚¢ãŒã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã¾ã›ã‚“',0
+msg_media_set_miss:	dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–ã«ãƒ¡ãƒ‡ã‚£ã‚¢ãŒæ­£ã—ãã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã¾ã›ã‚“',0
+msg_drive_not_ready:	dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–ã®æº–å‚™ãŒã§ãã¦ã„ã¾ã›ã‚“',0
+msg_err:		dc.b	'å‰Šé™¤ã§ãã¾ã›ã‚“ã§ã—ãŸ',0
 
 msg_myname:		dc.b	'rmdir'
 msg_colon:		dc.b	': ',0
-msg_no_memory:		dc.b	'ƒƒ‚ƒŠ‚ª‘«‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_illegal_option:	dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_too_few_args:	dc.b	'ˆø”‚ª‘«‚è‚Ü‚¹‚ñ',0
-msg_usage:		dc.b	CR,LF,'g—p–@:  rmdir <ƒfƒBƒŒƒNƒgƒŠ> ...'
+msg_no_memory:		dc.b	'ãƒ¡ãƒ¢ãƒªãŒè¶³ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_illegal_option:	dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_too_few_args:	dc.b	'å¼•æ•°ãŒè¶³ã‚Šã¾ã›ã‚“',0
+msg_usage:		dc.b	CR,LF,'ä½¿ç”¨æ³•:  rmdir <ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª> ...'
 msg_newline:		dc.b	CR,LF,0
 *****************************************************************
 .bss

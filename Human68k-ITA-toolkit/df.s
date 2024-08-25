@@ -32,8 +32,8 @@ start:
 ****************
 		lea	msg_header(pc),a0
 		bsr	puts
-		move.b	(a2)+,d2			*  A2‚Íƒpƒ‰ƒ[ƒ^BD2‚Í‚»‚Ì’·‚³
-		moveq	#0,d6				*  D6 : I—¹ƒR[ƒh
+		move.b	(a2)+,d2			*  A2ã¯ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã€‚D2ã¯ãã®é•·ã•
+		moveq	#0,d6				*  D6 : çµ‚äº†ã‚³ãƒ¼ãƒ‰
 		bsr	skip_space
 		bne	next_arg
 
@@ -359,8 +359,8 @@ skip_space_return:
 *      D1.L   unsigned long word b
 *
 * RETURN
-*      D0.L   a*b ‚Ì‰ºˆÊ
-*      D1.L   a*b ‚ÌãˆÊ
+*      D0.L   a*b ã®ä¸‹ä½
+*      D1.L   a*b ã®ä¸Šä½
 ****************************************************************
 mulul:
 		movem.l	d2-d4,-(a7)
@@ -403,7 +403,7 @@ mulul:
 *      D1.L   a%b
 *
 * NOTE
-*      b ‚ª‚O‚Å‚È‚¢‚±‚Æ‚ğƒ`ƒFƒbƒN‚µ‚È‚¢
+*      b ãŒï¼ã§ãªã„ã“ã¨ã‚’ãƒã‚§ãƒƒã‚¯ã—ãªã„
 ****************************************************************
 .xdef divul
 
@@ -441,8 +441,8 @@ itoa_tbl_3:
 
 msg_header:		dc.b	'Drive Volume-name              kbytes    used   avail capacity Mounted-on'
 msg_newline:		dc.b	CR,LF,0
-msg_bad_arg:		dc.b	'  ** ˆø”‚ª–³Œø‚Å‚·',CR,LF,0
-msg_bad_drive_name:	dc.b	'  ** ƒhƒ‰ƒCƒu–¼‚ª–³Œø‚Å‚·',CR,LF,0
+msg_bad_arg:		dc.b	'  ** å¼•æ•°ãŒç„¡åŠ¹ã§ã™',CR,LF,0
+msg_bad_drive_name:	dc.b	'  ** ãƒ‰ãƒ©ã‚¤ãƒ–åãŒç„¡åŠ¹ã§ã™',CR,LF,0
 *****************************************************************
 .bss
 

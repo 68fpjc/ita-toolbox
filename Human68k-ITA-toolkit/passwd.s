@@ -32,12 +32,12 @@
 .xref getpass
 .xref fgetpwnam
 
-** ŒÅ’è’è”
+** å›ºå®šå®šæ•°
 PDB_ProcessFlag	equ	$50
 
-** ‰Â•Ï’è”
-MAXLOGNAME	equ	64				*  255ˆÈ‰º
-MAXPASSWD	equ	64				*  65535ˆÈ‰º
+** å¯å¤‰å®šæ•°
+MAXLOGNAME	equ	64				*  255ä»¥ä¸‹
+MAXPASSWD	equ	64				*  65535ä»¥ä¸‹
 
 STACKSIZE	equ	512
 
@@ -45,12 +45,12 @@ STACKSIZE	equ	512
 
 start:
 		bra.s	start1
-		dc.b	'#HUPAIR',0			*  HUPAIR “K‡éŒ¾
+		dc.b	'#HUPAIR',0			*  HUPAIR é©åˆå®£è¨€
 start1:
 		lea	bsstop(pc),a6
 		lea	stack(a6),a7
 	*
-	*  •W€“ü—Í‚ª’[––‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN‚·‚é
+	*  æ¨™æº–å…¥åŠ›ãŒç«¯æœ«ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	*
 		clr.l	-(a7)
 		DOS	_IOCTRL
@@ -59,7 +59,7 @@ start1:
 		cmp.b	#%10000000,d0			*  CHR && (!RAW (COOKED))
 		bne	not_a_tty
 	*
-	*  ˆø”‚ğ‰ğß‚·‚é
+	*  å¼•æ•°ã‚’è§£é‡ˆã™ã‚‹
 	*
 		lea	1(a2),a0
 		bsr	DecodeHUPAIR
@@ -81,10 +81,10 @@ logname_ok:
 		tst.b	(a0)
 		beq	bad_logname
 
-		movea.l	a0,a2				*  A2 : ƒƒOƒCƒ“–¼
+		movea.l	a0,a2				*  A2 : ãƒ­ã‚°ã‚¤ãƒ³å
 		sf	incorrect(a6)
 		*
-		*  ƒƒOƒCƒ“–¼‚ğƒ`ƒFƒbƒN‚·‚é
+		*  ãƒ­ã‚°ã‚¤ãƒ³åã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		*
 		moveq	#0,d1
 		move.b	(a0)+,d0
@@ -110,10 +110,10 @@ check_logname_continue:
 		clr.b	-(a0)
 check_logname_done:
 		*
-		*  ƒpƒXƒ[ƒhEƒtƒ@ƒCƒ‹‚ğQÆ‚·‚é
+		*  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‚ç…§ã™ã‚‹
 		*
-		lea	passwd_file(pc),a1		*  ƒpƒXƒ[ƒhEƒtƒ@ƒCƒ‹‚ğ
-		bsr	open_sysfile			*  ƒI[ƒvƒ“‚·‚é
+		lea	passwd_file(pc),a1		*  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ã‚’
+		bsr	open_sysfile			*  ã‚ªãƒ¼ãƒ—ãƒ³ã™ã‚‹
 		bmi	passwd_invalid
 
 		move.w	d0,d2
@@ -135,7 +135,7 @@ passwd_invalid:
 		st	incorrect(a6)
 ask_passwd:
 		*
-		*  ƒpƒXƒ[ƒh‚ğq‚Ë‚ÄÆ‡‚·‚é
+		*  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å°‹ã­ã¦ç…§åˆã™ã‚‹
 		*
 		lea	msg_password(pc),a1
 		lea	password(a6),a0
@@ -296,8 +296,8 @@ open_sysfile:
 		bsr	make_sys_pathname
 		bmi	return
 
-		moveq	#0,d0				*  “Ç‚İ‚İƒ‚[ƒh‚Å
-		bra	tfopen				*  ƒI[ƒvƒ“‚·‚é
+		moveq	#0,d0				*  èª­ã¿è¾¼ã¿ãƒ¢ãƒ¼ãƒ‰ã§
+		bra	tfopen				*  ã‚ªãƒ¼ãƒ—ãƒ³ã™ã‚‹
 *****************************************************************
 .data
 

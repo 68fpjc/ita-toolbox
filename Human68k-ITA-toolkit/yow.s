@@ -2,7 +2,7 @@
 *
 * Itagaki Fumihiko 23-Jun-91  Create.
 *
-* Usage: yow [ <ファイル> ... ]
+* Usage: yow [ <繝輔ぃ繧､繝ｫ> ... ]
 
 .include doscall.h
 .include iocscall.h
@@ -33,7 +33,7 @@ start1:
 
 		lea	1(a2),a0
 		bsr	DecodeHUPAIR
-		move.w	d0,d1				*  D1.W : 引数の数
+		move.w	d0,d1				*  D1.W : 蠑墓焚縺ｮ謨ｰ
 		bne	select_file
 
 		lea	default_file(pc),a0
@@ -52,18 +52,18 @@ skipargs_start:
 		dbra	d0,skipargs_loop
 try_open:
 		lea	msg_open_fail(pc),a1
-		moveq	#0,d0				*  読み込みモードで
-		bsr	tfopen				*  ファイルをオープンする
-		move.l	d0,d2				*  D2.W : ファイル・ハンドル
+		moveq	#0,d0				*  隱ｭ縺ｿ霎ｼ縺ｿ繝｢繝ｼ繝峨〒
+		bsr	tfopen				*  繝輔ぃ繧､繝ｫ繧偵が繝ｼ繝励Φ縺吶ｋ
+		move.l	d0,d2				*  D2.W : 繝輔ぃ繧､繝ｫ繝ｻ繝上Φ繝峨Ν
 		bmi	error
 
 		lea	msg_seek_fail(pc),a1
 		move.w	#2,-(a7)
 		clr.l	-(a7)
 		move.w	d2,-(a7)
-		DOS	_SEEK				*  ファイルのサイズを得る
+		DOS	_SEEK				*  繝輔ぃ繧､繝ｫ縺ｮ繧ｵ繧､繧ｺ繧貞ｾ励ｋ
 		addq.l	#8,a7
-		move.l	d0,d3				*  D3.L : ファイルのサイズ
+		move.l	d0,d3				*  D3.L : 繝輔ぃ繧､繝ｫ縺ｮ繧ｵ繧､繧ｺ
 		bmi	error
 retry:
 		bsr	irandom
@@ -157,8 +157,8 @@ werror_1:
 
 default_file:		dc.b	'A:/usr/lib/yowlines',0
 msg_myname:		dc.b	'yow: ',0
-msg_open_fail:		dc.b	': オープンできません',CR,LF,0
-msg_seek_fail:		dc.b	': シークできません',CR,LF,0
+msg_open_fail:		dc.b	': 繧ｪ繝ｼ繝励Φ縺ｧ縺阪∪縺帙ｓ',CR,LF,0
+msg_seek_fail:		dc.b	': 繧ｷ繝ｼ繧ｯ縺ｧ縺阪∪縺帙ｓ',CR,LF,0
 *****************************************************************
 .bss
 

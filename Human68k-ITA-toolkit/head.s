@@ -2,7 +2,7 @@
 *
 * Itagaki Fumihiko  8-Jun-91  Create.
 *
-* Usage: head [ [ -Z ] [ -<s”> ] <ƒtƒ@ƒCƒ‹> ] ...
+* Usage: head [ [ -Z ] [ -<è¡Œæ•°> ] <ãƒ•ã‚¡ã‚¤ãƒ«> ] ...
 *
 
 .include doscall.h
@@ -24,15 +24,15 @@ start1:
 		lea	bsstop(pc),a6
 		lea	stack(a6),a7
 		*
-		move.l	8(a0),d7			*  ‚±‚Ìƒƒ‚ƒŠEƒuƒƒbƒN‚ÌI‚í‚è+1
-		sub.l	a7,d7				*  D7.L = stack ˆÈ~‚ÌƒuƒƒbƒN‚Ì‘å‚«‚³
+		move.l	8(a0),d7			*  ã“ã®ãƒ¡ãƒ¢ãƒªãƒ»ãƒ–ãƒ­ãƒƒã‚¯ã®çµ‚ã‚ã‚Š+1
+		sub.l	a7,d7				*  D7.L = stack ä»¥é™ã®ãƒ–ãƒ­ãƒƒã‚¯ã®å¤§ãã•
 		bls	insufficient_memory
 
-		moveq	#0,d5				*  D5.W : ƒGƒ‰[EƒR[ƒh
+		moveq	#0,d5				*  D5.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
 		*
 		lea	1(a2),a0
 		bsr	DecodeHUPAIR
-		move.w	d0,d6				*  D6.W : ˆø”ƒJƒEƒ“ƒ^
+		move.w	d0,d6				*  D6.W : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
 		move.l	#10,count(a6)
 		st	do_count(a6)
 		sf	flag_ctrlz(a6)
@@ -270,14 +270,14 @@ werror_1:
 	dc.b	'## head 1.0 ##  Copyright(C)1991 by Itagaki Fumihiko',0
 
 msg_myname:		dc.b	'head: ',0
-msg_no_memory:		dc.b	'ƒƒ‚ƒŠ‚ª‘«‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_open_fail:		dc.b	': ƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_read_fail:		dc.b	': “ü—ÍƒGƒ‰[',CR,LF,0
-msg_write_fail:		dc.b	'head: o—ÍƒGƒ‰[',CR,LF,0
-msg_illegal_option:	dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_stdin:		dc.b	'(•W€“ü—Í)',0
-msg_illegal_count:	dc.b	's”‚ª•s³‚Å‚·',0
-msg_usage:		dc.b	CR,LF,'g—p–@:  head [ [ -Z ] [ -<s”> ] <ƒtƒ@ƒCƒ‹> ] ...',CR,LF,0
+msg_no_memory:		dc.b	'ãƒ¡ãƒ¢ãƒªãŒè¶³ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_open_fail:		dc.b	': ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“',CR,LF,0
+msg_read_fail:		dc.b	': å…¥åŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_write_fail:		dc.b	'head: å‡ºåŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_illegal_option:	dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_stdin:		dc.b	'(æ¨™æº–å…¥åŠ›)',0
+msg_illegal_count:	dc.b	'è¡Œæ•°ãŒä¸æ­£ã§ã™',0
+msg_usage:		dc.b	CR,LF,'ä½¿ç”¨æ³•:  head [ [ -Z ] [ -<è¡Œæ•°> ] <ãƒ•ã‚¡ã‚¤ãƒ«> ] ...',CR,LF,0
 *****************************************************************
 .bss
 .even

@@ -94,7 +94,7 @@ do_org_keysns:
 		movea.l	(a7)+,a0
 		rts
 
-keisenmap:	.dc.b	'„ „Ÿ„¤„¨„£„¥„©„§„¡„¦„¢'
+keisenmap:	.dc.b	'â”‚â”€â””â”´â”˜â”œâ”¼â”¤â”Œâ”¬â”'
 
 L0000ae:
 		.dc.l	0
@@ -280,12 +280,12 @@ msg_title:
 	.dc.b	$f3,$42,$f3,$59,$20,$41,$2e,$4b
 	.dc.b	$4f,$55,$53,$41,$4b,$41,$0d,$0a
 	.dc.b	$00
-msg_release:		.dc.b	'í’“‰ğœ‚µ‚Ü‚µ‚½B',$0d,$0a,$00
-msg_resident:		.dc.b	'í’“‚µ‚Ü‚µ‚½B',$0d,$0a,$00
-msg_cannot_release:	.dc.b	'í’“‰ğœo—ˆ‚Ü‚¹‚ñB',$0d,$0a,$00
-msg_how_to_release:	.dc.b	'í’“‰ğœ‚Í -R ‚Å‚·B',$0d,$0a,$00
-msg_vector_is_occupied:	.dc.b	'ƒxƒNƒ^‚ªg—p‚³‚ê‚Ä‚¢‚Ü‚·B',$0d,$0a,$00
-msg_describe:		.dc.b	'OPT1+ƒeƒ“ƒL[‚ÅŒrü“ü—Í‚ğ‚µ‚Ü‚·B',$0d,$0a,$00
+msg_release:		.dc.b	'å¸¸é§è§£é™¤ã—ã¾ã—ãŸã€‚',$0d,$0a,$00
+msg_resident:		.dc.b	'å¸¸é§ã—ã¾ã—ãŸã€‚',$0d,$0a,$00
+msg_cannot_release:	.dc.b	'å¸¸é§è§£é™¤å‡ºæ¥ã¾ã›ã‚“ã€‚',$0d,$0a,$00
+msg_how_to_release:	.dc.b	'å¸¸é§è§£é™¤ã¯ -R ã§ã™ã€‚',$0d,$0a,$00
+msg_vector_is_occupied:	.dc.b	'ãƒ™ã‚¯ã‚¿ãŒä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã™ã€‚',$0d,$0a,$00
+msg_describe:		.dc.b	'OPT1+ãƒ†ãƒ³ã‚­ãƒ¼ã§ç½«ç·šå…¥åŠ›ã‚’ã—ã¾ã™ã€‚',$0d,$0a,$00
 L0002c0:
 	.dc.b	$00,$00
 

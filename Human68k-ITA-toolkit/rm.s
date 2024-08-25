@@ -2,7 +2,7 @@
 *
 * Itagaki Fumihiko 17-Jun-91  Create.
 *
-* Usage: rm [ -fir ] [ - ] <ƒtƒ@ƒCƒ‹> ...
+* Usage: rm [ -fir ] [ - ] <ãƒ•ã‚¡ã‚¤ãƒ«> ...
 *
 
 .include doscall.h
@@ -29,11 +29,11 @@ start:
 start1:
 		lea	bsstop(pc),a6
 		lea	stack(a6),a7
-		moveq	#0,d6				*  D6.W : ƒGƒ‰[EƒR[ƒh
+		moveq	#0,d6				*  D6.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
 		*
 		lea	1(a2),a0
 		bsr	DecodeHUPAIR
-		move.w	d0,d7				*  D7.W : ˆø”ƒJƒEƒ“ƒ^
+		move.w	d0,d7				*  D7.W : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
 		sf	flag_f(a6)
 		sf	flag_i(a6)
 		sf	flag_r(a6)
@@ -200,7 +200,7 @@ remove_file_loop:
 		move.l	d0,d3
 		bmi	read_fail
 .if 0
-		beq	remove_file_done	*i‚±‚±‚ÅI‚í‚ç‚È‚­‚Ä‚à‰º‚ÅI‚í‚Á‚Ä‚­‚ê‚éj
+		beq	remove_file_done	*ï¼ˆã“ã“ã§çµ‚ã‚ã‚‰ãªãã¦ã‚‚ä¸‹ã§çµ‚ã‚ã£ã¦ãã‚Œã‚‹ï¼‰
 .endif
 
 		sf	d4				* D4.B : EOF flag
@@ -495,12 +495,12 @@ putc_done:
 	dc.b	'## rm 1.0 ##  Copyright(C)1991 by Itagaki Fumihiko',0
 
 msg_myname:		dc.b	'rm: ',0
-msg_no_memory:		dc.b	'ƒƒ‚ƒŠ‚ª‘«‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_nofile:		dc.b	': ‚±‚Ì‚æ‚¤‚Èƒtƒ@ƒCƒ‹‚Í‚ ‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_read_fail:		dc.b	': “ü—ÍƒGƒ‰[',CR,LF,0
-msg_write_fail:		dc.b	'rm: o—ÍƒGƒ‰[',CR,LF,0
-msg_illegal_option:	dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_usage:		dc.b	'g—p–@:  rm [ -fir ] [ - ] <ƒtƒ@ƒCƒ‹> ...'
+msg_no_memory:		dc.b	'ãƒ¡ãƒ¢ãƒªãŒè¶³ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_nofile:		dc.b	': ã“ã®ã‚ˆã†ãªãƒ•ã‚¡ã‚¤ãƒ«ã¯ã‚ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_read_fail:		dc.b	': å…¥åŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_write_fail:		dc.b	'rm: å‡ºåŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_illegal_option:	dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_usage:		dc.b	'ä½¿ç”¨æ³•:  rm [ -fir ] [ - ] <ãƒ•ã‚¡ã‚¤ãƒ«> ...'
 msg_newline:		dc.b	CR,LF,0
 *****************************************************************
 .bss

@@ -18,12 +18,12 @@ STACKSIZE	equ	512
 
 cmd_vol:
 		lea	stack(pc),a7
-		move.b	(a2)+,d2			* A2‚Íƒpƒ‰ƒ[ƒ^BD2‚Í‚»‚Ì’·‚³
+		move.b	(a2)+,d2			* A2ã¯ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã€‚D2ã¯ãã®é•·ã•
 	**
-	**  ƒXƒCƒbƒ`‚Ì‰ğß
+	**  ã‚¹ã‚¤ãƒƒãƒã®è§£é‡ˆ
 	**
-		clr.b	d3				* D3‚Í -cƒtƒ‰ƒOBƒŠƒZƒbƒg‚µ‚Ä‚¨‚­
-		clr.b	d4				* D4‚Í -sƒtƒ‰ƒOBƒŠƒZƒbƒg‚µ‚Ä‚¨‚­
+		clr.b	d3				* D3ã¯ -cãƒ•ãƒ©ã‚°ã€‚ãƒªã‚»ãƒƒãƒˆã—ã¦ãŠã
+		clr.b	d4				* D4ã¯ -sãƒ•ãƒ©ã‚°ã€‚ãƒªã‚»ãƒƒãƒˆã—ã¦ãŠã
 		bsr	skip_space
 		beq	nomore_sw
 
@@ -40,10 +40,10 @@ cmd_vol:
 		cmp.b	#'c',d0
 		bne	arg_error			* Unknown switch.
 sw_clr:
-		moveq	#1,d3				* -cƒtƒ‰ƒO‚ğƒZƒbƒg‚·‚é
+		moveq	#1,d3				* -cãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 		bra	sw_ok
 sw_set:
-		moveq	#1,d4				* -sƒtƒ‰ƒO‚ğƒZƒbƒg‚·‚é
+		moveq	#1,d4				* -sãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 sw_ok:
 		addq.l	#2,a2
 		subq.b	#2,d2
@@ -55,32 +55,32 @@ sw_ok:
 		beq	arg_error			* Bad switch arg.
 nomore_sw:
 	**
-	**  ˆø”‚Ì”‚Ìƒ`ƒFƒbƒN
-	**  D1.B ‚É‚ÍŸ‚ÌŒê‚Ì’·‚³‚ªƒZƒbƒg‚³‚ê‚é
+	**  å¼•æ•°ã®æ•°ã®ãƒã‚§ãƒƒã‚¯
+	**  D1.B ã«ã¯æ¬¡ã®èªã®é•·ã•ãŒã‚»ãƒƒãƒˆã•ã‚Œã‚‹
 	**
-		movea.l	a2,a0				* Œê‚Ìæ“ªƒAƒhƒŒƒX‚ğ A0 ‚ÉƒZ[ƒu
-		clr.b	d1				* D1‚ÍŒê‚Ì’·‚³
+		movea.l	a2,a0				* èªã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ A0 ã«ã‚»ãƒ¼ãƒ–
+		clr.b	d1				* D1ã¯èªã®é•·ã•
 find_tail:
 		movea.l	a2,a3
 		bsr	skip_space
 		beq	tail_ok
 
 		cmpa.l	a3,a2
-		bne	arg_error			* Œê‚ÌŒã‚ë‚ÉX‚Éˆø”‚ª‚ ‚é
+		bne	arg_error			* èªã®å¾Œã‚ã«æ›´ã«å¼•æ•°ãŒã‚ã‚‹
 
 		addq.b	#1,d1
 		addq.l	#1,a2
 		subq.b	#1,d2
 		bne	find_tail
 tail_ok:
-		**	‚±‚±‚Ü‚Å—ˆ‚ê‚ÎA‚à‚¤ A2/D2 ‚Í—v‚ç‚È‚¢B
-		**	A0/D1 ‚ª ˆø”‚Å‚ ‚éB
+		**	ã“ã“ã¾ã§æ¥ã‚Œã°ã€ã‚‚ã† A2/D2 ã¯è¦ã‚‰ãªã„ã€‚
+		**	A0/D1 ãŒ å¼•æ•°ã§ã‚ã‚‹ã€‚
 	**
-	**  <drive>: ‚ğ’²‚×‚é
-	**  ‚à‚µ‚ ‚ê‚ÎA‘å•¶š‚É‚µ‚Ä D5.W ‚ÉƒZƒbƒg‚·‚é
-	**  ‚È‚¯‚ê‚Î D5.W ‚Í 0 ‚Æ‚·‚é
+	**  <drive>: ã‚’èª¿ã¹ã‚‹
+	**  ã‚‚ã—ã‚ã‚Œã°ã€å¤§æ–‡å­—ã«ã—ã¦ D5.W ã«ã‚»ãƒƒãƒˆã™ã‚‹
+	**  ãªã‘ã‚Œã° D5.W ã¯ 0 ã¨ã™ã‚‹
 	**
-		clr.w	d5				* D5‚Íw’èƒhƒ‰ƒCƒu–¼B0 ‚Æ‚µ‚Ä‚¨‚­
+		clr.w	d5				* D5ã¯æŒ‡å®šãƒ‰ãƒ©ã‚¤ãƒ–åã€‚0 ã¨ã—ã¦ãŠã
 		cmp.b	#2,d1
 		blo	drivename_skipped
 
@@ -99,41 +99,41 @@ tou_e:
 		cmp.b	#'A',d0
 		blo	drive_error			* Bad drive name
 
-		move.b	d0,d5				* D5‚Éw’è‚Ìƒhƒ‰ƒCƒu–¼‚ğƒZƒbƒg
+		move.b	d0,d5				* D5ã«æŒ‡å®šã®ãƒ‰ãƒ©ã‚¤ãƒ–åã‚’ã‚»ãƒƒãƒˆ
 		addq.l	#2,a0
 		subq.b	#2,d1
 
 drivename_skipped:
 	**
-	**  <name>‚ğ’²‚×‚é
+	**  <name>ã‚’èª¿ã¹ã‚‹
 	**
 		tst.b	d1
 		bne	name_specified
 
 		*
-		*  <name>‚Í–³‚¢
+		*  <name>ã¯ç„¡ã„
 		*
-		tst.b	d4				* -s ‚Ì‚Æ‚«‚É‚Í
-		bne	arg_error			* ‚±‚¢‚Â‚ÍƒGƒ‰[‚¾
+		tst.b	d4				* -s ã®ã¨ãã«ã¯
+		bne	arg_error			* ã“ã„ã¤ã¯ã‚¨ãƒ©ãƒ¼ã 
 
 		bra	arg_ok
 
 name_specified:
-		*  <name>‚ª‚ ‚é
+		*  <name>ãŒã‚ã‚‹
 		*
-		tst.b	d4				* -s ‚Å‚È‚¯‚ê‚Î
-		beq	arg_error			* ‚±‚¢‚Â‚ÍƒGƒ‰[‚¾
+		tst.b	d4				* -s ã§ãªã‘ã‚Œã°
+		beq	arg_error			* ã“ã„ã¤ã¯ã‚¨ãƒ©ãƒ¼ã 
 
 		cmp.b	#21,d1
-		bhi	vol_errn			* <name> ‚ª’·‰ß‚¬‚é
+		bhi	vol_errn			* <name> ãŒé•·éãã‚‹
 		*
-		*  <name> ‚ğA³“–«‚ğƒ`ƒFƒbƒN‚µ‚È‚ª‚ç new_volume_label ‚ÉƒZƒbƒg‚·‚é
-		*  19 •¶š‚ß‚Ì‘O‚É‚Í . ‚ğ•t‰Á‚·‚é
+		*  <name> ã‚’ã€æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯ã—ãªãŒã‚‰ new_volume_label ã«ã‚»ãƒƒãƒˆã™ã‚‹
+		*  19 æ–‡å­—ã‚ã®å‰ã«ã¯ . ã‚’ä»˜åŠ ã™ã‚‹
 		*
 		lea	new_volume_label+3(pc),a1
-		clr.b	d2				* D2‚Í•¶š”ƒJƒEƒ“ƒ^
+		clr.b	d2				* D2ã¯æ–‡å­—æ•°ã‚«ã‚¦ãƒ³ã‚¿
 make_volume_name_loop_0:
-		clr.b	d7				* D3‚ÍŠ¿šƒJƒEƒ“ƒ^
+		clr.b	d7				* D3ã¯æ¼¢å­—ã‚«ã‚¦ãƒ³ã‚¿
 make_volume_name_loop:
 		tst.b	d1
 		beq	make_volume_name_done
@@ -148,22 +148,22 @@ make_volume_name_1:
 		move.b	d0,(a1)+
 		addq.b	#1,d2
 		cmp.b	#':',d0
-		beq	vol_errn			* •s³‚È•¶š
+		beq	vol_errn			* ä¸æ­£ãªæ–‡å­—
 
 		cmp.b	#'.',d0
-		beq	vol_errn			* •s³‚È•¶š
+		beq	vol_errn			* ä¸æ­£ãªæ–‡å­—
 
 		cmp.b	#'*',d0
-		beq	vol_errn			* •s³‚È•¶š
+		beq	vol_errn			* ä¸æ­£ãªæ–‡å­—
 
 		cmp.b	#'?',d0
-		beq	vol_errn			* •s³‚È•¶š
+		beq	vol_errn			* ä¸æ­£ãªæ–‡å­—
 
 		cmp.b	#'/',d0
-		beq	vol_errn			* •s³‚È•¶š
+		beq	vol_errn			* ä¸æ­£ãªæ–‡å­—
 
 		cmp.b	#'\',d0
-		beq	vol_errn			* •s³‚È•¶š
+		beq	vol_errn			* ä¸æ­£ãªæ–‡å­—
 
 		tst.b	d7
 		bne	make_volume_name_loop_0
@@ -178,26 +178,26 @@ make_volume_name_1:
 		blo	make_volume_name_loop
 make_volume_name_2Bcode:
 		cmp.b	#18,d2
-		beq	vol_errn			* Š¿š‚ªå•”‚ÆŠg’£q‚ÉŒ×‚Á‚Ä‚¢‚é
+		beq	vol_errn			* æ¼¢å­—ãŒä¸»éƒ¨ã¨æ‹¡å¼µå­ã«è·¨ã£ã¦ã„ã‚‹
 
 		cmp.b	#21,d2
-		beq	vol_errn			* Š¿š‚ª––”ö‚ğ‚Í‚İ‚Å‚Ä‚¢‚é
+		beq	vol_errn			* æ¼¢å­—ãŒæœ«å°¾ã‚’ã¯ã¿ã§ã¦ã„ã‚‹
 
 		move.b	#1,d7
 		bra	make_volume_name_loop
 
 make_volume_name_done:
-		clr.b	(a1)				* ƒRƒs[Š®—¹
+		clr.b	(a1)				* ã‚³ãƒ”ãƒ¼å®Œäº†
 
 arg_ok:
 	**
-	**  ‘ÎÛƒhƒ‰ƒCƒu‚ğŒˆ‚ß‚é
+	**  å¯¾è±¡ãƒ‰ãƒ©ã‚¤ãƒ–ã‚’æ±ºã‚ã‚‹
 	**
 		DOS	_CURDRV
 		tst.w	d5
 		beq	for_current_drive
 
-		move.w	d0,d1		* ã‚Ì _CURDRV ‚Ì’l
+		move.w	d0,d1		* ä¸Šã® _CURDRV ã®å€¤
 		move.w	d5,d2
 		sub.b	#'A',d2
 		move.w	d2,-(a7)
@@ -215,14 +215,14 @@ for_current_drive:
 		add.b	#'A',d0
 		move.b	d0,d5
 drive_ok:
-		lea	findbuf(pc),a0				* ‚Ç‚Ìê‡‚É‚àg‚í‚ê‚é
+		lea	findbuf(pc),a0				* ã©ã®å ´åˆã«ã‚‚ä½¿ã‚ã‚Œã‚‹
 		bsr	set_drive_name
 		move.b	#'*',(a0)+
 		move.b	#'.',(a0)+
 		move.b	#'*',(a0)+
 		clr.b	(a0)
 
-		lea	delete_name_buf(pc),a0			* erase ‚Æ change ‚Åg‚í‚ê‚é
+		lea	delete_name_buf(pc),a0			* erase ã¨ change ã§ä½¿ã‚ã‚Œã‚‹
 		bsr	set_drive_name
 
 		tst.b	d4					* -s
@@ -289,7 +289,7 @@ change_volume:
 		lea	new_volume_label(pc),a0
 		bsr	set_drive_name
 		*
-		*  Œ»ƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹‚ğ’T‚µ‚Äƒ^ƒCƒ€EƒXƒ^ƒ“ƒv‚ğD1‚É“¾‚é
+		*  ç¾ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ã‚’æ¢ã—ã¦ã‚¿ã‚¤ãƒ ãƒ»ã‚¹ã‚¿ãƒ³ãƒ—ã‚’D1ã«å¾—ã‚‹
 		*
 		clr.l	d1
 		bsr	find_volume
@@ -300,9 +300,9 @@ change_volume:
 		swap	d1
 find_current_volume_done:
 		*
-		*  Vƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹–¼‚Æ“¯‚¶–¼‘O‚Ì
-		*  ƒfƒBƒŒƒNƒgƒŠEƒGƒ“ƒgƒŠiƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹‚ğœ‚­j‚ª
-		*  –³‚¢‚±‚Æ‚ğƒ`ƒFƒbƒN‚·‚é
+		*  æ–°ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«åã¨åŒã˜åå‰ã®
+		*  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ»ã‚¨ãƒ³ãƒˆãƒªï¼ˆãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ã‚’é™¤ãï¼‰ãŒ
+		*  ç„¡ã„ã“ã¨ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		*
 		move.w	#$3f,-(a7)
 		pea	new_volume_label(pc)
@@ -311,17 +311,17 @@ find_current_volume_done:
 		lea	10(a7),a7
 		tst.l	d0
 find_same_name_entry:
-		bmi	vol_change_2			* –³‚¢
+		bmi	vol_change_2			* ç„¡ã„
 
 		btst.b	#FILEMODE_VOLUME,filebuf_atr(pc)
-		beq	vol_errm			* ‚ ‚éI
+		beq	vol_errm			* ã‚ã‚‹ï¼
 
 		bsr	findnext
 		bra	find_same_name_entry
 vol_change_2:
 		*
-		*  Vƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹–¼‚Æ“¯‚¶–¼‘O‚Ì
-		*  ƒfƒoƒCƒX‚ª–³‚¢‚±‚Æ‚ğƒ`ƒFƒbƒN‚·‚é
+		*  æ–°ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«åã¨åŒã˜åå‰ã®
+		*  ãƒ‡ãƒã‚¤ã‚¹ãŒç„¡ã„ã“ã¨ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		*
 		move.w	#2,-(a7)
 		pea	new_volume_label(pc)
@@ -330,12 +330,12 @@ vol_change_2:
 		tst.l	d0
 		bpl	vol_errcm
 		*
-		*  Œ»ƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹‚ğíœ‚·‚é
+		*  ç¾ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ã‚’å‰Šé™¤ã™ã‚‹
 		*
 		bsr	vol_clr_sub
 		bmi	vol_errd
 		*
-		*  V‚µ‚¢ƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹‚ğV‹Kì¬‚·‚é
+		*  æ–°ã—ã„ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ã‚’æ–°è¦ä½œæˆã™ã‚‹
 		*
 		move.w	#8,-(a7)
 		pea	new_volume_label(pc)
@@ -344,10 +344,10 @@ vol_change_2:
 		tst.l	d0
 		bmi	vol_errm
 		*
-		*  V‚µ‚¢ƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹‚Ìƒ^ƒCƒ€EƒXƒ^ƒ“ƒv‚ğ
-		*  ‹Œƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹i‚à‚µ‚ ‚ê‚Îj‚É‡‚í‚¹‚é
+		*  æ–°ã—ã„ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ã®ã‚¿ã‚¤ãƒ ãƒ»ã‚¹ã‚¿ãƒ³ãƒ—ã‚’
+		*  æ—§ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ï¼ˆã‚‚ã—ã‚ã‚Œã°ï¼‰ã«åˆã‚ã›ã‚‹
 		*
-		move.l	d1,-(a7)	* D1 ‚ª 0 ‚Ì‚Æ‚«‚àAæ“¾‚Æ‚È‚é‚¾‚¯‚¾‚©‚ç‘åä•v
+		move.l	d1,-(a7)	* D1 ãŒ 0 ã®ã¨ãã‚‚ã€å–å¾—ã¨ãªã‚‹ã ã‘ã ã‹ã‚‰å¤§ä¸ˆå¤«
 		move.w	d0,-(a7)
 		DOS	_FILEDATE
 		move.l	d0,d1
@@ -510,17 +510,17 @@ skip_space_return:
 ****************************************************************
 .data
 
-msg_volume1:	dc.b	'ƒhƒ‰ƒCƒu ',0
-msg_volume2:	dc.b	': ‚Ìƒ{ƒŠƒ…|ƒ€ƒ‰ƒxƒ‹‚Í',0
-msg_datetime3:	dc.b	' ‚Å‚·',CR,LF,0
-msg_novolume:	dc.b	'‚ ‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_volume_err:	dc.b	'ƒ{ƒŠƒ…|ƒ€ƒ‰ƒxƒ‹‚ª–³Œø‚Å‚·',CR,LF,0
-msg_volnomake:	dc.b	'ƒ{ƒŠƒ…|ƒ€ƒ‰ƒxƒ‹‚ªì‚ê‚Ü‚¹‚ñ',CR,LF,0
-msg_drive_err:	dc.b	'ƒhƒ‰ƒCƒu–¼‚ª–³Œø‚Å‚·',CR,LF,0
-msg_bad_arg:	dc.b	'ƒpƒ‰ƒ|ƒ^‚ª–³Œø‚Å‚·',CR,LF,0
-msg_volnodel:	dc.b	'‹Œ'
-msg_volnodel1:	dc.b	'ƒ{ƒŠƒ…|ƒ€ƒ‰ƒxƒ‹‚ªÁ‹‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_volnofound:	dc.b	'ƒ{ƒŠƒ…|ƒ€ƒ‰ƒxƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ',CR,LF,0
+msg_volume1:	dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ– ',0
+msg_volume2:	dc.b	': ã®ãƒœãƒªãƒ¥âˆ’ãƒ ãƒ©ãƒ™ãƒ«ã¯',0
+msg_datetime3:	dc.b	' ã§ã™',CR,LF,0
+msg_novolume:	dc.b	'ã‚ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_volume_err:	dc.b	'ãƒœãƒªãƒ¥âˆ’ãƒ ãƒ©ãƒ™ãƒ«ãŒç„¡åŠ¹ã§ã™',CR,LF,0
+msg_volnomake:	dc.b	'ãƒœãƒªãƒ¥âˆ’ãƒ ãƒ©ãƒ™ãƒ«ãŒä½œã‚Œã¾ã›ã‚“',CR,LF,0
+msg_drive_err:	dc.b	'ãƒ‰ãƒ©ã‚¤ãƒ–åãŒç„¡åŠ¹ã§ã™',CR,LF,0
+msg_bad_arg:	dc.b	'ãƒ‘ãƒ©ãƒ¡âˆ’ã‚¿ãŒç„¡åŠ¹ã§ã™',CR,LF,0
+msg_volnodel:	dc.b	'æ—§'
+msg_volnodel1:	dc.b	'ãƒœãƒªãƒ¥âˆ’ãƒ ãƒ©ãƒ™ãƒ«ãŒæ¶ˆå»ã§ãã¾ã›ã‚“',CR,LF,0
+msg_volnofound:	dc.b	'ãƒœãƒªãƒ¥âˆ’ãƒ ãƒ©ãƒ™ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“',CR,LF,0
 ****************************************************************
 .bss
 

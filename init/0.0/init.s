@@ -16,7 +16,7 @@
 .xref getenv
 .xref fclose
 
-** ‰Â•Ï’è”
+** å¯å¤‰å®šæ•°
 CMDLINE_SIZE	equ	256
 
 STACKSIZE	equ	512
@@ -25,17 +25,17 @@ STACKSIZE	equ	512
 
 start:
 		bra.s	start1
-		dc.b	'#HUPAIR',0			*  HUPAIR“K‡éŒ¾
+		dc.b	'#HUPAIR',0			*  HUPAIRé©åˆå®£è¨€
 start1:
-		move.l	8(a0),a5			*  A5 := —^‚¦‚ç‚ê‚½ƒƒ‚ƒŠ‚Ì’ê
-		lea	bsstop(pc),a6			*  A6 := BSS‚Ìæ“ªƒAƒhƒŒƒX
-		lea	stack_bottom(a6),a7		*  A7 := ƒXƒ^ƒbƒN‚Ì’ê
-		move.l	a3,init_envp(a6)		*  ŠÂ‹«‚ÌƒAƒhƒŒƒX‚ğ‹L‰¯‚·‚é
+		move.l	8(a0),a5			*  A5 := ä¸ãˆã‚‰ã‚ŒãŸãƒ¡ãƒ¢ãƒªã®åº•
+		lea	bsstop(pc),a6			*  A6 := BSSã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	stack_bottom(a6),a7		*  A7 := ã‚¹ã‚¿ãƒƒã‚¯ã®åº•
+		move.l	a3,init_envp(a6)		*  ç’°å¢ƒã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨˜æ†¶ã™ã‚‹
 	*
-	*  è—Lƒƒ‚ƒŠ‚ğØ‚è‹l‚ß‚é
+	*  å æœ‰ãƒ¡ãƒ¢ãƒªã‚’åˆ‡ã‚Šè©°ã‚ã‚‹
 	*
 		DOS	_GETPDB
-		movea.l	d0,a1				*  A1 : PDBƒAƒhƒŒƒX
+		movea.l	d0,a1				*  A1 : PDBã‚¢ãƒ‰ãƒ¬ã‚¹
 		lea	stack_bottom(a6),a0
 		move.l	a0,d0
 		sub.l	a1,d0
@@ -44,7 +44,7 @@ start1:
 		DOS	_SETBLOCK
 		addq.l	#8,a7
 	*
-	*  init‚ÌŠÂ‹«‚ğ•¡»‚·‚é
+	*  initã®ç’°å¢ƒã‚’è¤‡è£½ã™ã‚‹
 	*
 		movea.l	init_envp(a6),a1
 		lea	4(a1),a0
@@ -67,7 +67,7 @@ start1:
 		move.l	d2,d0
 		bsr	memmovi
 	*
-	*  mb’èn/bin/login ‚ğŒˆ‚ß‚é
+	*  ï¼»æš«å®šï¼½/bin/login ã‚’æ±ºã‚ã‚‹
 	*
 		lea	file_login(pc),a1
 		lea	child_pathname(a6),a0
@@ -87,7 +87,7 @@ start1:
 		bsr	SetHUPAIR
 		bmi	too_long_arg
 	*
-	*  ƒVƒOƒiƒ‹ˆ—ƒ‹[ƒ`ƒ“‚ğİ’è‚·‚é
+	*  ã‚·ã‚°ãƒŠãƒ«å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³ã‚’è¨­å®šã™ã‚‹
 	*
 		st	in_me
 		pea	manage_interrupt_signal(pc)
@@ -99,18 +99,18 @@ start1:
 		DOS	_INTVCS
 		addq.l	#6,a7
 	**
-	**  ƒƒCƒ“Eƒ‹[ƒv
+	**  ãƒ¡ã‚¤ãƒ³ãƒ»ãƒ«ãƒ¼ãƒ—
 	**
 main_loop:
 		bsr	xfclose
 	*
-	*  qƒvƒƒZƒX‚ğexec‚·‚é
+	*  å­ãƒ—ãƒ­ã‚»ã‚¹ã‚’execã™ã‚‹
 	*
 		sf	in_me
-		move.l	child_envp(a6),-(a7)		*  qƒvƒƒZƒX‚ÌŠÂ‹«‚ÌƒAƒhƒŒƒX
-		pea	child_args(a6)			*  ‹N“®‚·‚éƒvƒƒOƒ‰ƒ€‚Ö‚Ìˆø”‚ÌƒAƒhƒŒƒX
-		pea	child_pathname(a6)		*  ‹N“®‚·‚éƒvƒƒOƒ‰ƒ€‚ÌƒpƒX–¼‚ÌƒAƒhƒŒƒX
-		clr.w	-(a7)				*  ƒtƒ@ƒ“ƒNƒVƒ‡ƒ“FLOAD&EXEC
+		move.l	child_envp(a6),-(a7)		*  å­ãƒ—ãƒ­ã‚»ã‚¹ã®ç’°å¢ƒã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		pea	child_args(a6)			*  èµ·å‹•ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¸ã®å¼•æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		pea	child_pathname(a6)		*  èµ·å‹•ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ‘ã‚¹åã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		clr.w	-(a7)				*  ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³ï¼šLOAD&EXEC
 		DOS	_EXEC
 		lea	14(a7),a7
 		lea	bsstop(pc),a6

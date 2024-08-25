@@ -1,0 +1,14 @@
+.vscode/
+
+*.x
+*.r
+*.o
+*.a
+*.l
+*.map
+*.lzh
+*.ish
+*.bak
+*.$$*
+*.att
+*.ucb

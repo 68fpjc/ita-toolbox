@@ -140,10 +140,10 @@ skip_space_return:
 msg_off:	dc.b	'off',0
 msg_on:		dc.b	'on',0
 msg_kill:	dc.b	'kill',0
-msg_1:		dc.b	'break ‚Í <',0
-msg_2:		dc.b	'> ‚Å‚·',CR,LF,0
-msg_bad_arg:	dc.b	'ƒpƒ‰ƒ|ƒ^‚ª–³Œø‚Å‚·',CR,LF
-		dc.b	'g—p–@: cbreak [ on | off | kill ]',CR,LF
+msg_1:		dc.b	'break ã¯ <',0
+msg_2:		dc.b	'> ã§ã™',CR,LF,0
+msg_bad_arg:	dc.b	'ãƒ‘ãƒ©ãƒ¡âˆ’ã‚¿ãŒç„¡åŠ¹ã§ã™',CR,LF
+		dc.b	'ä½¿ç”¨æ³•: cbreak [ on | off | kill ]',CR,LF
 ****************************************************************
 .bss
 		ds.b	STACKSIZE

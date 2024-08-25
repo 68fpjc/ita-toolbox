@@ -24,13 +24,13 @@ start:
 		lea	bsstop(pc),a6
 		lea	stack(a6),a7
 		*
-		move.l	8(a0),d7			*  ‚±‚Ìƒƒ‚ƒŠEƒuƒƒbƒN‚ÌI‚í‚è+1
-		sub.l	a7,d7				*  D7.L = stack ˆÈ~‚ÌƒuƒƒbƒN‚Ì‘å‚«‚³
-		moveq	#0,d5				*  D5.W : ƒGƒ‰[EƒR[ƒh
+		move.l	8(a0),d7			*  ã“ã®ãƒ¡ãƒ¢ãƒªãƒ»ãƒ–ãƒ­ãƒƒã‚¯ã®çµ‚ã‚ã‚Š+1
+		sub.l	a7,d7				*  D7.L = stack ä»¥é™ã®ãƒ–ãƒ­ãƒƒã‚¯ã®å¤§ãã•
+		moveq	#0,d5				*  D5.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
 		*
 		lea	1(a2),a0
 		bsr	DecodeHUPAIR
-		move.w	d0,d6				*  D6.W : ˆø”ƒJƒEƒ“ƒ^
+		move.w	d0,d6				*  D6.W : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
 		sf	flag_i(a6)
 		sf	flag_f(a6)
 parse_option:
@@ -347,10 +347,10 @@ werror_1:
 	dc.b	'## mv 1.0 ##  Copyright(C)1991 by Itagaki Fumihiko',0
 
 msg_myname:		dc.b	'mv: ',0
-msg_open_fail:		dc.b	': ƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_write_fail:		dc.b	'mv: o—ÍƒGƒ‰[',CR,LF,0
-msg_illegal_option:	dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_usage:		dc.b	CR,LF,'g—p–@:  cat [ -if ] [ - ] <file> ... <target>',CR,LF,0
+msg_open_fail:		dc.b	': ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“',CR,LF,0
+msg_write_fail:		dc.b	'mv: å‡ºåŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_illegal_option:	dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_usage:		dc.b	CR,LF,'ä½¿ç”¨æ³•:  cat [ -if ] [ - ] <file> ... <target>',CR,LF,0
 *****************************************************************
 .bss
 .even

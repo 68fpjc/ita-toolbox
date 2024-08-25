@@ -36,12 +36,12 @@
 .xref getpass
 .xref fgetpwnam
 
-** ŒÅ’è’è”
+** å›ºå®šå®šæ•°
 PDB_ProcessFlag	equ	$50
 
-** ‰Â•Ï’è”
-MAXLOGNAME	equ	64				*  255ˆÈ‰º
-MAXPASSWD	equ	64				*  65535ˆÈ‰º
+** å¯å¤‰å®šæ•°
+MAXLOGNAME	equ	64				*  255ä»¥ä¸‹
+MAXPASSWD	equ	64				*  65535ä»¥ä¸‹
 
 STACKSIZE	equ	512
 
@@ -49,27 +49,27 @@ STACKSIZE	equ	512
 
 start:
 		bra.s	start1
-		dc.b	'#HUPAIR',0			*  HUPAIR“K‡éŒ¾
-		dc.b	'login',0			*  loginƒRƒ}ƒ“ƒhéŒ¾
+		dc.b	'#HUPAIR',0			*  HUPAIRé©åˆå®£è¨€
+		dc.b	'login',0			*  loginã‚³ãƒãƒ³ãƒ‰å®£è¨€
 start1:
-		move.l	8(a0),a5			*  A5 := —^‚¦‚ç‚ê‚½ƒƒ‚ƒŠ‚Ì’ê
-		lea	bsstop(pc),a6			*  A6 := BSS‚Ìæ“ªƒAƒhƒŒƒX
-		lea	stack_bottom(a6),a7		*  A7 := ƒXƒ^ƒbƒN‚Ì’ê
-		move.l	a3,login_envp(a6)		*  ŠÂ‹«‚ÌƒAƒhƒŒƒX‚ğ‹L‰¯‚·‚é
+		move.l	8(a0),a5			*  A5 := ä¸ãˆã‚‰ã‚ŒãŸãƒ¡ãƒ¢ãƒªã®åº•
+		lea	bsstop(pc),a6			*  A6 := BSSã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	stack_bottom(a6),a7		*  A7 := ã‚¹ã‚¿ãƒƒã‚¯ã®åº•
+		move.l	a3,login_envp(a6)		*  ç’°å¢ƒã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨˜æ†¶ã™ã‚‹
 		clr.l	user_envp(a6)
 	*
-	*  login©g‚ÌƒJƒŒƒ“ƒgEƒfƒBƒŒƒNƒgƒŠ‚ğ•Û‘¶‚·‚é
+	*  loginè‡ªèº«ã®ã‚«ãƒ¬ãƒ³ãƒˆãƒ»ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä¿å­˜ã™ã‚‹
 	*
 		lea	login_cwd(a6),a0
 		bsr	getcwd
 	*
-	*  $SYSROOT/etc/nologin ‚ª‚ ‚ê‚Îexit‚·‚é
+	*  $SYSROOT/etc/nologin ãŒã‚ã‚Œã°exitã™ã‚‹
 	*
 		lea	file_nologin(pc),a1
 		bsr	open_sysfile
 		bpl	nologin
 	*
-	*  •W€“ü—Í‚ª’[––‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN‚·‚é
+	*  æ¨™æº–å…¥åŠ›ãŒç«¯æœ«ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	*
 		clr.l	-(a7)
 		DOS	_IOCTRL
@@ -78,19 +78,19 @@ start1:
 		cmp.b	#%10000000,d0			*  CHR && (!RAW (COOKED))
 		bne	not_a_tty
 	*
-	*  ˆø”‚ğƒfƒR[ƒh‚µC‰ğß‚·‚é
+	*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã—ï¼Œè§£é‡ˆã™ã‚‹
 	*
 		sf	protect_env(a6)
 		clr.b	logname+2(a6)
 
-		lea	envarg_top(a6),a1	*  A1 := ˆø”•À‚Ñ‚ğŠi”[‚·‚éƒGƒŠƒA‚Ìæ“ªƒAƒhƒŒƒX
-		lea	1(a2),a0		*  A0 := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ìæ“ªƒAƒhƒŒƒX
-		bsr	strlen			*  D0.L ‚É A0 ‚ª¦‚·•¶š—ñ‚Ì’·‚³‚ğ‹‚ßC
-		add.l	a1,d0			*    Ši”[ƒGƒŠƒA‚Ì—e—Ê‚ğ
-		cmp.l	a5,d0			*    ƒ`ƒFƒbƒN‚·‚é
+		lea	envarg_top(a6),a1	*  A1 := å¼•æ•°ä¸¦ã³ã‚’æ ¼ç´ã™ã‚‹ã‚¨ãƒªã‚¢ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	1(a2),a0		*  A0 := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		bsr	strlen			*  D0.L ã« A0 ãŒç¤ºã™æ–‡å­—åˆ—ã®é•·ã•ã‚’æ±‚ã‚ï¼Œ
+		add.l	a1,d0			*    æ ¼ç´ã‚¨ãƒªã‚¢ã®å®¹é‡ã‚’
+		cmp.l	a5,d0			*    ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		bhs	insufficient_memory_for_me
 
-		bsr	DecodeHUPAIR			*  ƒfƒR[ƒh‚·‚é
+		bsr	DecodeHUPAIR			*  ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹
 		movea.l	a1,a0
 		move.w	d0,argc(a6)
 		beq	parse_arg_done
@@ -119,7 +119,7 @@ set_logname_done:
 		subq.w	#1,argc(a6)
 parse_arg_done:
 	*
-	*  c‚è‚Ìˆø”‚ğƒXƒ^ƒbƒN‚Ì’¼Œã‚É•Û‘¶‚·‚é
+	*  æ®‹ã‚Šã®å¼•æ•°ã‚’ã‚¹ã‚¿ãƒƒã‚¯ã®ç›´å¾Œã«ä¿å­˜ã™ã‚‹
 	*
 		movea.l	a0,a1
 		lea	envarg_top(a6),a0
@@ -131,10 +131,10 @@ move_envarg_loop:
 move_envarg_continue:
 		dbra	d7,move_envarg_loop
 	*
-	*  è—Lƒƒ‚ƒŠ‚ğØ‚è‹l‚ß‚é
+	*  å æœ‰ãƒ¡ãƒ¢ãƒªã‚’åˆ‡ã‚Šè©°ã‚ã‚‹
 	*
 		DOS	_GETPDB
-		movea.l	d0,a1				*  A1 : PDBƒAƒhƒŒƒX
+		movea.l	d0,a1				*  A1 : PDBã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d0
 		sub.l	a1,d0
 		move.l	d0,-(a7)
@@ -142,9 +142,9 @@ move_envarg_continue:
 		DOS	_SETBLOCK
 		addq.l	#8,a7
 	*
-	*  eƒvƒƒZƒX‚ª–³‚¢‚È‚ç‚ÎƒVƒOƒiƒ‹ˆ—ƒ‹[ƒ`ƒ“‚ğİ’è‚·‚é
+	*  è¦ªãƒ—ãƒ­ã‚»ã‚¹ãŒç„¡ã„ãªã‚‰ã°ã‚·ã‚°ãƒŠãƒ«å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³ã‚’è¨­å®šã™ã‚‹
 	*
-		tst.l	PDB_ProcessFlag(a1)		*  0:e—L‚è  -1:OS‚©‚ç‹N“®
+		tst.l	PDB_ProcessFlag(a1)		*  0:è¦ªæœ‰ã‚Š  -1:OSã‹ã‚‰èµ·å‹•
 		beq	test_logname
 
 		st	in_login(a6)
@@ -158,7 +158,7 @@ move_envarg_continue:
 		addq.l	#6,a7
 		bra	test_logname
 	**
-	**  ƒƒCƒ“Eƒ‹[ƒv
+	**  ãƒ¡ã‚¤ãƒ³ãƒ»ãƒ«ãƒ¼ãƒ—
 	**
 main_loop:
 		move.l	user_envp(a6),d0
@@ -173,7 +173,7 @@ free_envp_ok:
 		bsr	chdir
 ask_logname:
 		*
-		*  ƒƒOƒCƒ“–¼‚ğ“ü—Í‚·‚é
+		*  ãƒ­ã‚°ã‚¤ãƒ³åã‚’å…¥åŠ›ã™ã‚‹
 		*
 		pea	msg_login(pc)
 		DOS	_PRINT
@@ -198,7 +198,7 @@ test_logname:
 		move.l	a0,logname_top(a6)
 		sf	incorrect(a6)
 	*
-	*  ƒƒOƒCƒ“–¼‚ğƒ`ƒFƒbƒN‚·‚é
+	*  ãƒ­ã‚°ã‚¤ãƒ³åã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	*
 		moveq	#0,d1
 		move.b	(a0)+,d0
@@ -227,10 +227,10 @@ check_logname_continue:
 		bne	login_invalid
 check_logname_done:
 	*
-	*  ƒpƒXƒ[ƒhEƒtƒ@ƒCƒ‹‚ğQÆ‚·‚é
+	*  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‚ç…§ã™ã‚‹
 	*
-		lea	file_passwd(pc),a1		*  ƒpƒXƒ[ƒhEƒtƒ@ƒCƒ‹‚ğ
-		bsr	open_sysfile			*  ƒI[ƒvƒ“‚·‚é
+		lea	file_passwd(pc),a1		*  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ã‚’
+		bsr	open_sysfile			*  ã‚ªãƒ¼ãƒ—ãƒ³ã™ã‚‹
 		bmi	login_invalid
 
 		lea	pwd_buf(a6),a0
@@ -250,7 +250,7 @@ login_invalid:
 		st	incorrect(a6)
 ask_passwd:
 	*
-	*  ƒpƒXƒ[ƒh‚ğq‚Ë‚ÄÆ‡‚·‚é
+	*  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å°‹ã­ã¦ç…§åˆã™ã‚‹
 	*
 		lea	msg_password(pc),a1
 		lea	password(a6),a0
@@ -266,7 +266,7 @@ ask_passwd:
 		bne	login_incorrect
 do_login:
 	*
-	*  ƒ†[ƒU‚ÌƒfƒBƒŒƒNƒgƒŠ‚É chdir ‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã« chdir ã™ã‚‹
 	*
 		lea	pwd_buf+PW_DIR(a6),a0
 		tst.b	(a0)
@@ -292,7 +292,7 @@ check_dir_1:
 
 chdir_ok:
 	*
-	*  ƒ†[ƒU‚ÌƒVƒFƒ‹‚Æƒpƒ‰ƒ[ƒ^‚ğŒˆ’è‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ã‚·ã‚§ãƒ«ã¨ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’æ±ºå®šã™ã‚‹
 	*
 		lea	pwd_buf+PW_SHELL(a6),a0
 		tst.b	(a0)
@@ -329,16 +329,16 @@ shell_ok:
 		move.b	d0,(a0)+
 		bsr	strcpy
 	*
-	*  ƒ†[ƒU‚ÌŠÂ‹«‚ğì¬‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã‚’ä½œæˆã™ã‚‹
 	*
 		*
-		*  ƒ†[ƒU‚ÌŠÂ‹«‚Ì‚½‚ß‚ÉÅ‘åƒuƒƒbƒN‚ğŠm•Û‚·‚é
+		*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã®ãŸã‚ã«æœ€å¤§ãƒ–ãƒ­ãƒƒã‚¯ã‚’ç¢ºä¿ã™ã‚‹
 		*
 		move.l	#$00ffffff,-(a7)
 		DOS	_MALLOC
 		addq.l	#4,a7
 		sub.l	#$81000000,d0
-		move.l	d0,d1				*  D1.L : Šm•Û‰Â”\‚È‘å‚«‚³
+		move.l	d0,d1				*  D1.L : ç¢ºä¿å¯èƒ½ãªå¤§ãã•
 		cmp.l	#5,d1
 		blo	insufficient_memory_for_shell
 
@@ -349,12 +349,12 @@ shell_ok:
 		bmi	insufficient_memory_for_shell
 
 		move.l	d0,user_envp(a6)
-		movea.l	d0,a3				*  A3 : ƒ†[ƒU‚ÌŠÂ‹«
+		movea.l	d0,a3				*  A3 : ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒ
 		movea.l	a3,a2
 		move.l	d1,(a2)+
 		subq.l	#5,d1
 		*
-		*  login‚ÌŠÂ‹«‚ğŒp³‚·‚é
+		*  loginã®ç’°å¢ƒã‚’ç¶™æ‰¿ã™ã‚‹
 		*
 		movea.l	login_envp(a6),a0
 		cmpa.l	#-1,a0
@@ -407,7 +407,7 @@ dupenv_next:
 dupenv_done:
 		clr.b	(a2)
 		*
-		*  LOGNAME, USER, HOME, SHELL ‚ğƒZƒbƒg‚·‚é
+		*  LOGNAME, USER, HOME, SHELL ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 		*
 		lea	pwd_buf+PW_NAME(a6),a1
 		lea	word_LOGNAME(pc),a0
@@ -428,7 +428,7 @@ dupenv_done:
 		bsr	setenv_path
 		bne	insufficient_memory_for_shell
 		*
-		*  ˆø”‚©‚çƒZƒbƒg‚·‚é
+		*  å¼•æ•°ã‹ã‚‰ã‚»ãƒƒãƒˆã™ã‚‹
 		*
 		lea	envarg_top(a6),a0
 		move.w	argc(a6),d7
@@ -465,7 +465,7 @@ setargenv_doneone:
 setargenv_continue:
 		dbra	d7,setargenv_loop
 		*
-		*  ƒ†[ƒU‚ÌŠÂ‹«‚ğØ‚è‹l‚ß‚é
+		*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã‚’åˆ‡ã‚Šè©°ã‚ã‚‹
 		*
 		lea	4(a3),a0
 		bsr	strazbot
@@ -479,10 +479,10 @@ setargenv_continue:
 		DOS	_SETBLOCK
 		addq.l	#8,a7
 	*
-	*  $HOME/%hushlogin ‚ğƒ`ƒFƒbƒN‚·‚é
+	*  $HOME/%hushlogin ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	*
 		link	a5,#-54
-		move.w	#$37,-(a7)			*  ƒ{ƒŠƒ…[ƒ€Eƒ‰ƒxƒ‹ˆÈŠO‚·‚×‚Ä
+		move.w	#$37,-(a7)			*  ãƒœãƒªãƒ¥ãƒ¼ãƒ ãƒ»ãƒ©ãƒ™ãƒ«ä»¥å¤–ã™ã¹ã¦
 		pea	file_hushlogin(pc)
 		pea	-54(a5)
 		DOS	_FILES
@@ -491,23 +491,23 @@ setargenv_continue:
 		tst.l	d0
 		bpl	motd_done
 	*
-	*  A:/etc/motd ‚ğo—Í‚·‚é
+	*  A:/etc/motd ã‚’å‡ºåŠ›ã™ã‚‹
 	*
-		lea	file_motd(pc),a1		*  motd ƒtƒ@ƒCƒ‹‚ğ
-		bsr	open_sysfile			*  ƒI[ƒvƒ“‚µ‚Ä‚İ‚é
+		lea	file_motd(pc),a1		*  motd ãƒ•ã‚¡ã‚¤ãƒ«ã‚’
+		bsr	open_sysfile			*  ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¦ã¿ã‚‹
 		bmi	motd_done
 
 		bsr	print_file
 motd_done:
 	*
-	*  ƒ†[ƒU‚ÌƒVƒFƒ‹‚ğexec‚·‚é
+	*  ãƒ¦ãƒ¼ã‚¶ã®ã‚·ã‚§ãƒ«ã‚’execã™ã‚‹
 	*
 		clr.w	child_signal(a6)
 		sf	in_login(a6)
-		move.l	user_envp(a6),-(a7)		*  ƒ†[ƒU‚ÌŠÂ‹«‚ÌƒAƒhƒŒƒX
-		pea	parameter(a6)			*  ‹N“®‚·‚éƒvƒƒOƒ‰ƒ€‚Ö‚Ìˆø”‚ÌƒAƒhƒŒƒX
-		pea	shell_pathname(a6)		*  ‹N“®‚·‚éƒvƒƒOƒ‰ƒ€‚ÌƒpƒX–¼‚ÌƒAƒhƒŒƒX
-		move.w	#1,-(a7)			*  ƒtƒ@ƒ“ƒNƒVƒ‡ƒ“FLOAD
+		move.l	user_envp(a6),-(a7)		*  ãƒ¦ãƒ¼ã‚¶ã®ç’°å¢ƒã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		pea	parameter(a6)			*  èµ·å‹•ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¸ã®å¼•æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		pea	shell_pathname(a6)		*  èµ·å‹•ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ‘ã‚¹åã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		move.w	#1,-(a7)			*  ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³ï¼šLOAD
 		DOS	_EXEC
 		lea	14(a7),a7
 
@@ -518,8 +518,8 @@ motd_done:
 		tst.l	d0
 		bmi	shell_done
 
-		move.l	a4,-(a7)			*  ƒGƒ“ƒgƒŠEƒAƒhƒŒƒX
-		move.w	#4,-(a7)			*  ƒtƒ@ƒ“ƒNƒVƒ‡ƒ“FEXEC
+		move.l	a4,-(a7)			*  ã‚¨ãƒ³ãƒˆãƒªãƒ»ã‚¢ãƒ‰ãƒ¬ã‚¹
+		move.w	#4,-(a7)			*  ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³ï¼šEXEC
 		DOS	_EXEC
 		addq.l	#6,a7
 shell_done:
@@ -675,8 +675,8 @@ open_sysfile:
 		bsr	make_sys_pathname
 		bmi	return
 
-		moveq	#0,d0				*  “Ç‚İ‚İƒ‚[ƒh‚Å
-		bsr	tfopen				*  ƒI[ƒvƒ“‚·‚é
+		moveq	#0,d0				*  èª­ã¿è¾¼ã¿ãƒ¢ãƒ¼ãƒ‰ã§
+		bsr	tfopen				*  ã‚ªãƒ¼ãƒ—ãƒ³ã™ã‚‹
 		bmi	open_sysfile_return
 
 		move.w	d0,file_handle(a6)
