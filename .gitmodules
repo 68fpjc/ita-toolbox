@@ -1,3 +1,99 @@
 [submodule "01-fish"]
 	path = 01-fish
 	url = https://github.com/68fpjc/Human68k-ita-toolbox-1-fish.git
+[submodule "02-login"]
+	path = 02-login
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-2-login.git
+[submodule "03-passwd"]
+	path = 03-passwd
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-3-passwd.git
+[submodule "04-mkdir"]
+	path = 04-mkdir
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-4-mkdir.git
+[submodule "05-rmdir"]
+	path = 05-rmdir
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-5-rmdir.git
+[submodule "06-rm"]
+	path = 06-rm
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-6-rm.git
+[submodule "07-mv"]
+	path = 07-mv
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-7-mv.git
+[submodule "08-cp"]
+	path = 08-cp
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-8-cp.git
+[submodule "09-ln"]
+	path = 09-ln
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-9-ln.git
+[submodule "10-chmod"]
+	path = 10-chmod
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-10-chmod.git
+[submodule "11-touch"]
+	path = 11-touch
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-11-touch.git
+[submodule "12-ls"]
+	path = 12-ls
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-12-ls.git
+[submodule "13-du"]
+	path = 13-du
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-13-du.git
+[submodule "14-strip"]
+	path = 14-strip
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-14-strip.git
+[submodule "16-date"]
+	path = 16-date
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-16-date.git
+[submodule "17-wc"]
+	path = 17-wc
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-17-wc.git
+[submodule "18-cat"]
+	path = 18-cat
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-18-cat.git
+[submodule "19-head"]
+	path = 19-head
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-19-head.git
+[submodule "20-tail"]
+	path = 20-tail
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-20-tail.git
+[submodule "21-tee"]
+	path = 21-tee
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-21-tee.git
+[submodule "22-strings"]
+	path = 22-strings
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-22-strings.git
+[submodule "23-split"]
+	path = 23-split
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-23-split.git
+[submodule "24-tr"]
+	path = 24-tr
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-24-tr.git
+[submodule "25-cut"]
+	path = 25-cut
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-25-cut.git
+[submodule "26-paste"]
+	path = 26-paste
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-26-paste.git
+[submodule "27-expand"]
+	path = 27-expand
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-27-expand.git
+[submodule "28-unexpand"]
+	path = 28-unexpand
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-28-unexpand.git
+[submodule "29-fold"]
+	path = 29-fold
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-29-fold.git
+[submodule "30-rev"]
+	path = 30-rev
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-30-rev.git
+[submodule "31-uniq"]
+	path = 31-uniq
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-31-uniq.git
+[submodule "32-comm"]
+	path = 32-comm
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-32-comm.git
+[submodule "33-join"]
+	path = 33-join
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-33-join.git
+[submodule "34-colrm"]
+	path = 34-colrm
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-34-colrm.git
