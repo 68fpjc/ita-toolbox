@@ -1,0 +1,3 @@
+[submodule "01-fish"]
+	path = 01-fish
+	url = https://github.com/68fpjc/Human68k-ita-toolbox-1-fish.git
