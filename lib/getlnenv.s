@@ -11,6 +11,7 @@ SAVREGS		.reg	a0-a1/a5	* a4 は壊れない
 	pea	_keepchk(pc)
 	.dc.w	$fff6			* DOS _SUPER_JSR
 	addq	#4,sp
+	addi.l	#240,d0
 	movem.l	(sp)+,SAVREGS
 	rts
 
